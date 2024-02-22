@@ -1,12 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import NavBar from './NavBar';
+import { GluestackUIProvider} from "@gluestack-ui/themed"
+import { config } from "@gluestack-ui/config" // Optional if you want to use default theme
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <GluestackUIProvider config={config}>
+        <NavBar/>
+        <StatusBar style="auto" />
+        <Text style={styles.text}>CS317 Group 10's React Native Mobile App</Text>
+      </GluestackUIProvider>
     </View>
+    
+    
   );
 }
 
@@ -15,6 +23,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  text: {
+    margin: '2em',
+    padding: '1em',
+    textAlign: 'center',
+    fontWeight: '100',
+    backgroundImage: 'linear-gradient(45deg, lightgreen, lightblue)',
+    borderRadius: '1em',
   },
 });
