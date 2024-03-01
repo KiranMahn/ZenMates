@@ -1,0 +1,8 @@
+mindfullnes app: 
+
+- mindfullness docs (maybe meditation)
+- push notifications on weather, and altitude 
+- use brightness sensor --> if in dark room and sunny outside push notif --> go outside
+- whatsapp sdk to communicate
+- daily ofrum discussion board
+- 
