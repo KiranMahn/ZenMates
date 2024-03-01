@@ -3,32 +3,27 @@ import { StyleSheet, Text, View } from 'react-native';
 import NavBar from './NavBar';
 import { GluestackUIProvider} from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
-import MiniMap from './MiniMap';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {HomeScreen, ProfileScreen} from './HomeScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <GluestackUIProvider config={config}>
-        <NavBar/>
+    <GluestackUIProvider config={config}>
+      <NavigationContainer>
+        <Stack.Navigator>
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+              />
+              <Stack.Screen name="Profile" component={ProfileScreen} />
 
-        <StatusBar style="auto" />
-        <Text style={styles.text}>CS317 Group 10's React Native Mobile App</Text>
-      </GluestackUIProvider>
-    </View>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GluestackUIProvider>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  text: {
-    margin: '2em',
-    padding: 5,
-    textAlign: 'center',
-    fontWeight: '100',
-    borderRadius: 1,
-  },
-});

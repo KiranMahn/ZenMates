@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
     Button,
     ButtonText,
@@ -7,7 +6,7 @@ import {
     ButtonSpinner,
     ButtonGroup,
   } from "@gluestack-ui/themed";
-  import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 
 export default function NavBar() {
   return (
