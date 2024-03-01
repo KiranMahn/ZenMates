@@ -15,13 +15,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.CSMobileDevApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "android.config.googleMaps.apiKey": "AIzaSyDUTQ1HuxGpIoy8akXAiFz5afqOMSc7JQI"
     },
     "web": {
       "favicon": "./assets/favicon.png"

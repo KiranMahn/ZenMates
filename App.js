@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import NavBar from './NavBar';
-import { GluestackUIProvider} from "@gluestack-ui/themed"
-import { config } from "@gluestack-ui/config" // Optional if you want to use default theme
+import { GluestackUIProvider} from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
+import MiniMap from './MiniMap';
 
 export default function App() {
   return (
@@ -11,10 +12,9 @@ export default function App() {
         <NavBar/>
         <StatusBar style="auto" />
         <Text style={styles.text}>CS317 Group 10's React Native Mobile App</Text>
+        <MiniMap/> 
       </GluestackUIProvider>
     </View>
-    
-    
   );
 }
 
@@ -26,10 +26,9 @@ const styles = StyleSheet.create({
   },
   text: {
     margin: '2em',
-    padding: '1em',
+    padding: 5,
     textAlign: 'center',
     fontWeight: '100',
-    backgroundImage: 'linear-gradient(45deg, lightgreen, lightblue)',
-    borderRadius: '1em',
+    borderRadius: 1,
   },
 });

@@ -16,10 +16,12 @@
     "bootstrap": "^5.3.3",
     "expo": "~50.0.7",
     "expo-status-bar": "~1.11.1",
+    "ol": "^9.0.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "18.2.0",
     "react-native": "0.73.4",
+    "react-native-maps": "^1.10.3",
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.19.6"
   },
