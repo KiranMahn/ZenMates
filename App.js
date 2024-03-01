@@ -10,9 +10,9 @@ export default function App() {
     <View style={styles.container}>
       <GluestackUIProvider config={config}>
         <NavBar/>
+
         <StatusBar style="auto" />
         <Text style={styles.text}>CS317 Group 10's React Native Mobile App</Text>
-        <MiniMap/> 
       </GluestackUIProvider>
     </View>
   );

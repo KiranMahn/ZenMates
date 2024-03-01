@@ -1,8 +1,11 @@
 mindfullnes app: 
 
-- mindfullness docs (maybe meditation)
-- push notifications on weather, and altitude 
+
+- push notifications on weather, brightness, and altitude
+- notifications tab with history of notifications saved in local 
 - use brightness sensor --> if in dark room and sunny outside push notif --> go outside
+
+- mindfullness docs (maybe meditation)
 - whatsapp sdk to communicate
-- daily ofrum discussion board
-- 
+- daily forum discussion board
+
