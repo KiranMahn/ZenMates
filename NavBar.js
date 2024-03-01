@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
     Button,
     ButtonText,
@@ -7,7 +6,7 @@ import {
     ButtonSpinner,
     ButtonGroup,
   } from "@gluestack-ui/themed";
-  import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 
 export default function NavBar() {
   return (
@@ -20,8 +19,13 @@ export default function NavBar() {
             action="primary"
             isDisabled={false}
             isFocusVisible={false}
-            >
-            <ButtonText>Signup </ButtonText>
+            style={[
+              styles.button, 
+              {
+                alignSelf: 'flex-start',
+              },
+            ]}>
+              <ButtonText>Signup </ButtonText>
             </Button>
             <Button
             size="sm"
@@ -29,8 +33,13 @@ export default function NavBar() {
             action="primary"
             isDisabled={false}
             isFocusVisible={false}
-            >
-            <ButtonText>Login </ButtonText>
+            style={[
+              styles.button, 
+              {
+                alignSelf: 'flex-start',
+              },
+            ]}>
+              <ButtonText>Login </ButtonText>
         </Button>
         </View>
       </SafeAreaView>
@@ -41,14 +50,23 @@ export default function NavBar() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    backgroundColor: '#000000',
-    width: '100vw',
-    height: '10vh',
+    justifyContent: 'space-between',
+    width: '100%',
+    height: '30%',
   },
   text: {
     color: '#ffffff',
     fontWeight: 'bold',
   },
+  button: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 4,
+    //backgroundColor: 'blue',
+    marginHorizontal: '1%',
+    marginBottom: 6,
+    minWidth: '30%',
+    maxWidth: '40%',
+    textAlign: 'center',
+  }
 });

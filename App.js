@@ -1,35 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import NavBar from './NavBar';
-import { GluestackUIProvider} from "@gluestack-ui/themed"
-import { config } from "@gluestack-ui/config" // Optional if you want to use default theme
+import { GluestackUIProvider} from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {HomeScreen} from './HomeScreen';
+import ProfileScreen from "./ProfileScreen";
+import GuideScreen from "./GuideScreen";
+import Chat from "./ChatScreen";
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <GluestackUIProvider config={config}>
-        <NavBar/>
-        <StatusBar style="auto" />
-        <Text style={styles.text}>CS317 Group 10's React Native Mobile App</Text>
-      </GluestackUIProvider>
-    </View>
-    
+    <GluestackUIProvider config={config}>
+      <NavigationContainer>
+        <Stack.Navigator>
+              {/* HomeScreen */}
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+              />
+              {/* Profile */}
+              <Stack.Screen 
+                name="Profile" 
+                component={ProfileScreen} 
+              />
+              {/* Guide */}
+               <Stack.Screen 
+                name="GuideScreen" 
+                component={GuideScreen} 
+              />
+              {/* Chat */}
+              <Stack.Screen 
+                name="Chat" 
+                component={Chat} 
+              />
+
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GluestackUIProvider>
     
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  text: {
-    margin: '2em',
-    padding: '1em',
-    textAlign: 'center',
-    fontWeight: '100',
-    backgroundImage: 'linear-gradient(45deg, lightgreen, lightblue)',
-    borderRadius: '1em',
-  },
-});
