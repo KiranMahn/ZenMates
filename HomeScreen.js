@@ -1,37 +1,93 @@
 import NavBar from "./NavBar";
-import { Button, Text, View } from "react-native";
+import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
+import ProfileScreen from "./ProfileScreen";
+
 const HomeScreen = ({navigation}) => {
     return (
-        <View style={styles.container}>
-            <NavBar/>
-            <Text style={styles.text}>CS317 Group 10s React Native Mobile App</Text>
-            <Button
-                title="My Profile"
-                onPress={() => {
-                    navigation.navigate('Profile', {name: 'John'})
-                }}
-            />
+        <View>
+            <View style={styles.container}>
+                <NavBar style={{alignSelf: 'flex-start', marginTop: 1, flex: 1}}/>
+                <View style={styles.btnContainer}>
+                    {/* Profile button */}
+                    <Pressable
+                        style={styles.pageButton}
+                        title="My Profile"
+                        onPress={() => {
+                            navigation.navigate('Profile', {name: 'John'})
+                        }}>
+                        <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
+                        <Text style={{textAlign: 'center'}}> My Profile</Text>
+                    </Pressable>
+                    {/* Mindfulness Guide button */}
+                    <Pressable
+                        style={styles.pageButton}
+                        title="Mindfulness Guide"
+                        onPress={() => {
+                            navigation.navigate('GuideScreen', {name: 'John'})
+                        }}>
+                        <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
+                        <Text style={{textAlign: 'center'}}>Mindfulness Guide</Text>
+                    </Pressable>
+                    {/* Chat button */}
+                    <Pressable
+                        style={styles.pageButton}
+                        title="Chat"
+                        onPress={() => {
+                            navigation.navigate('Chat', {name: 'John'})
+                        }}>
+                        <Image source={require('./assets/chatIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
+                        <Text style={{textAlign: 'center'}}>Chat</Text>
+                    </Pressable>
+                        
+                    
+                </View>
+                
+            </View>
         </View>
+        
     );
 }
 
-const ProfileScreen = ({navigation, route}) => {
-    return <Text>This is {route.params.name}'s profile</Text>;
-  };
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
+      flexDirection: 'column',
+      backgroundColor: 'white',
       alignItems: 'center',
+      alignContent: 'center',
+      padding: 20,
+      height: '100%',
+      justifyContent: 'flex-start',
     },
     text: {
-      margin: '2em',
+      margin: 5,
       padding: 5,
       textAlign: 'center',
-      fontWeight: '100',
+      fontWeight: '700',
       borderRadius: 1,
+    },
+    btnContainer: {
+        width: '100%',
+        flex: 1,
+        alignSelf: 'flex-start',
+        justifyContent: 'space-evenly',
+    },
+    pageButton: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 8,
+        paddingVertical: 6,
+        borderRadius: 12,
+        backgroundColor: 'aliceblue',
+        // alignSelf: 'flex-start',
+        marginHorizontal: '1%',
+        // marginBottom: 6,
+        minWidth: '40%',
+        maxWidth: '50%',
+        minHeight: '7%',
+        maxHeight: '25%',
+        alignSelf: 'center',
     },
   });
 
