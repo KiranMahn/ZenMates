@@ -9,6 +9,7 @@ import {HomeScreen} from './HomeScreen';
 import ProfileScreen from "./ProfileScreen";
 import GuideScreen from "./GuideScreen";
 import Chat from "./ChatScreen";
+import ArticleDetails from './ArticleDetails';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -35,6 +36,12 @@ export default function App() {
               <Stack.Screen 
                 name="Chat" 
                 component={Chat} 
+              />
+              {/* Article */}
+              <Stack.Screen 
+                name="ArticleDetails" 
+                component={ArticleDetails} 
+                initialParams={{itemId: 0}}
               />
 
         </Stack.Navigator>
