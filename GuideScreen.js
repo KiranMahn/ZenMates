@@ -19,7 +19,7 @@ const GuideScreen = ({navigation, route}) => {
     console.log(data.articles);
 
     listComponents.push(
-          <TouchableOpacity key={data.articles[i]["title"]} style={{width: '100%', height: '20%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 5, padding: 5, display:'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}}>
+          <TouchableOpacity key={data.articles[i]["id"]} style={{width: '100%', height: '20%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 5, padding: 5, display:'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}}>
             <View>
               <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
             </View>
