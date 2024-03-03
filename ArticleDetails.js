@@ -5,9 +5,7 @@ import { getArticleById } from "./Requests";
 const ArticleDetails = ({navigation, route}) => {
 
     const { itemId } = route.params;
-    console.log("article details id: " + itemId);
     let data = getArticleById(itemId);
-    console.log("data: ", data);
     return (
         <View style={{width: '100%', height: '100%', backgroundColor: 'white', padding: 10}}>
             <Text style={{fontSize: 40, textAlign: 'center', fontWeight: 'bold', margin: 10}}>{data["title"]}</Text>

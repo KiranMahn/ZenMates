@@ -10,8 +10,6 @@ const GuideScreen = ({navigation, route}) => {
   // get data for all articles
   let data = getArticlesData();
 
-  console.log(data.articles);
-
   let listComponents = [];
 
   const handleClick = (id) => {
@@ -20,7 +18,6 @@ const GuideScreen = ({navigation, route}) => {
 
 
   for(let i = 0; i < data.articles.length; i++) {
-    console.log(data.articles);
 
     listComponents.push(
           <TouchableOpacity key={data.articles[i]["id"]} style={{display:'flex', flex: 1, width: '100%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 10, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}} onPress={() => handleClick(data.articles[i]["id"])}>
