@@ -10,40 +10,37 @@ import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 
 export default function NavBar() {
   return (
-    <>
-      <SafeAreaView>
-        <View style={styles.container}>
-            <Button
-            size="sm"
-            variant="solid"
-            action="primary"
-            isDisabled={false}
-            isFocusVisible={false}
-            style={[
-              styles.button, 
-              {
-                alignSelf: 'flex-start',
-              },
-            ]}>
-              <ButtonText>Signup </ButtonText>
-            </Button>
-            <Button
-            size="sm"
-            variant="outline"
-            action="primary"
-            isDisabled={false}
-            isFocusVisible={false}
-            style={[
-              styles.button, 
-              {
-                alignSelf: 'flex-start',
-              },
-            ]}>
-              <ButtonText>Login </ButtonText>
-        </Button>
-        </View>
-      </SafeAreaView>
-    </>
+    
+    <View style={styles.container}>
+      <Button
+      size="sm"
+      variant="solid"
+      action="primary"
+      isDisabled={false}
+      isFocusVisible={false}
+      style={[
+        styles.button, 
+        {
+          alignSelf: 'flex-start',
+        },
+      ]}>
+        <ButtonText>Signup </ButtonText>
+      </Button>
+      <Button
+      size="sm"
+      variant="outline"
+      action="primary"
+      isDisabled={false}
+      isFocusVisible={false}
+      style={[
+        styles.button, 
+        {
+          alignSelf: 'flex-start',
+        },
+      ]}>
+        <ButtonText>Login </ButtonText>
+      </Button>
+    </View>
   );
 }
 
@@ -52,7 +49,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    height: '30%',
+    height: '10%',
+    alignSelf: 'flex-start',
+    marginTop: 1,
   },
   text: {
     color: '#ffffff',

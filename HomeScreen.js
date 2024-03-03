@@ -7,7 +7,7 @@ const HomeScreen = ({navigation}) => {
     return (
         <View>
             <View style={styles.container}>
-                <NavBar style={{alignSelf: 'flex-start', marginTop: 1, flex: 1}}/>
+                <NavBar/>
                 <View style={styles.btnContainer}>
                     {/* Profile button */}
                     <Pressable
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingVertical: 6,
         borderRadius: 12,
-        backgroundColor: 'aliceblue',
+        backgroundColor: 'rgba(202, 227,248, 0.5)',
         // alignSelf: 'flex-start',
         marginHorizontal: '1%',
         // marginBottom: 6,
