@@ -14,42 +14,42 @@ const getArticlesData = () => {
                     "image": './assets/bookIcon.png', // find better way to store images?
                     "shortDesc": 'Learn to be thoughtful towards yourself and others', 
                     "textBody": "textBody",
-                    "id": '0'
+                    "id": '1'
                 },
                 {
                     "title": 'Breathing Excercises',
                     "image": './assets/chatIcon.png', // find better way to store images?
                     "shortDesc": 'Work on your breathwork to reduce stress', 
                     "textBody": "textBody",
-                    "id": '0'
+                    "id": '2'
                 },
                 {
                     "title": 'Thoughts and Feelings',
                     "image": './assets/bookIcon.png', // find better way to store images?
                     "shortDesc": 'Detach thoughts from emotions', 
                     "textBody": "textBody",
-                    "id": '0'
+                    "id": '3'
                 },
                 {
                     "title": 'Movement',
                     "image": './assets/chatIcon.png', // find better way to store images?
                     "shortDesc": 'Strengthen the mind-body connection', 
                     "textBody": "textBody",
-                    "id": '0'
+                    "id": '4'
                 },
                 {
-                    "title": 'Verbal Meditation 2',
+                    "title": 'Verbal',
                     "image": './assets/bookIcon.png', // find better way to store images?
                     "shortDesc": 'Detach thoughts from emotions', 
                     "textBody": "textBody",
-                    "id": '0'
+                    "id": '5'
                 },
                 {
-                    "title": 'Thoughts and Feelings 2',
+                    "title": 'Thoughts',
                     "image": './assets/chatIcon.png', // find better way to store images?
                     "shortDesc": 'Detach thoughts from emotions', 
                     "textBody": "textBody",
-                    "id": '0'
+                    "id": '6'
                 },
             ]
         
