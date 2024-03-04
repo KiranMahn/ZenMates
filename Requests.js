@@ -48,9 +48,9 @@ const getArticlesData = () => {
                     "id": '0'
                 },
                 {
-                    "title": 'Thoughtfullness',
+                    "title": 'Connect with others',
                     "image": './assets/bookIcon.png', // find better way to store images?
-                    "shortDesc": 'Learn to be thoughtful towards yourself and others', 
+                    "shortDesc": 'Good relationships are important for your mental wellbeing', 
                     "textBody": "textBody",
                     "id": '1'
                 },
@@ -62,30 +62,30 @@ const getArticlesData = () => {
                     "id": '2'
                 },
                 {
-                    "title": 'Thoughts and Feelings',
+                    "title": 'Be physically active',
                     "image": './assets/bookIcon.png', // find better way to store images?
-                    "shortDesc": 'Detach thoughts from emotions', 
+                    "shortDesc": 'Being active is not only great for your physical health and fitness.', 
                     "textBody": "textBody",
                     "id": '3'
                 },
                 {
-                    "title": 'Movement',
+                    "title": 'Learn new skills',
                     "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'Strengthen the mind-body connection', 
+                    "shortDesc": 'Research shows that learning new skills can also improve your mental wellbeing', 
                     "textBody": "textBody",
                     "id": '4'
                 },
                 {
-                    "title": 'Verbal',
+                    "title": 'Give to others',
                     "image": './assets/bookIcon.png', // find better way to store images?
-                    "shortDesc": 'Detach thoughts from emotions', 
+                    "shortDesc": 'Research suggests that acts of giving and kindness can help improve your mental wellbeing', 
                     "textBody": "textBody",
                     "id": '5'
                 },
                 {
-                    "title": 'Thoughts',
+                    "title": 'Pay attention to the present moment',
                     "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'Detach thoughts from emotions', 
+                    "shortDesc": 'Paying more attention to the present moment can improve your mental wellbeing.', 
                     "textBody": "textBody",
                     "id": '6'
                 },

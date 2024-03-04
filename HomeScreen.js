@@ -7,7 +7,6 @@ const HomeScreen = ({navigation}) => {
     return (
         <View>
             <View style={styles.container}>
-                <NavBar/>
                 <View style={styles.btnContainer}>
                     {/* Profile button */}
                     <Pressable
