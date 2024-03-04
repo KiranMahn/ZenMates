@@ -41,9 +41,9 @@ const getArticlesData = () => {
     let data = { 
         articles: [ 
                 {
-                    "title": 'Verbal Meditation',
+                    "title": 'Breathing exercises',
                     "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'Out loud meditation', 
+                    "shortDesc": 'This calming breathing technique for stress, anxiety and panic takes just a few minutes and can be done anywhere.', 
                     "textBody": "textBody",
                     "id": '0'
                 },
