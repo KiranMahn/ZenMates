@@ -6,7 +6,7 @@ const ProfileScreen = ({navigation, route}) => {
         <View style={{width:"100%", height:"20%", display: "flex", justifyContent: 'space-around', alignItems: 'center'}}>
           <Image source={require('./assets/userIcon.png')} style={{margin: 30, height: 100, width: 100}}/>
           {/* <Text>{route.params.name}</Text>; */}
-          <Text style={{fontSize: '25', fontWeight: 'bold'}}>Username</Text>
+          <Text style={{fontSize: 25, fontWeight: 'bold'}}>Username</Text>
         </View>
 
         <View style={{width: '100%', height: '65%', marginTop: 30}}>
