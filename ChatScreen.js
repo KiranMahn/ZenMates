@@ -1,40 +1,42 @@
+import React, {useCallback} from 'react';
+import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
+const supportedURL = 'https://wa.me/447484823438?text=I%27m%20interested%20in%20your%20car%20for%20sale';
 
-import React, { useState } from 'react';
-import { View, TextInput, Button, Platform } from 'react-native';
-import SendIntent from 'react-native-send-intent';
+const unsupportedURL = 'slack://open?team=123456';
 
-const ChatScreen = ({navigation, route}) => {
-  const [message, setMessage] = useState('');
+const OpenURLButton = ({url, children}) => {
+  const handlePress = useCallback(async () => {
+    // Checking if the link is supported for links with custom URL scheme.
+    const supported = await Linking.canOpenURL(url);
 
-  const sendWhatsAppMessage = () => {
-    const phoneNumber = '1234567890'; // Replace with the recipient's phone number
-    const text = encodeURIComponent(message);
+    if (supported) {
+      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+      // by some browser in the mobile
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${url}`);
+    }
+  }, [url]);
 
-    // Construct the WhatsApp intent
-    const intent = `whatsapp://send?phone=${phoneNumber}&text=${text}`;
+  return <Button title={children} onPress={handlePress} />;
+};
 
-    SendIntent.openAppWithData({ action: SendIntent.ACTION_VIEW, data: intent })
-      .then(isOpened => {
-        if (isOpened) {
-          console.log('WhatsApp opened successfully on iOS');
-        } else {
-          console.log('WhatsApp not installed on iOS');
-        }
-      })
-      .catch(error => console.error('Error opening WhatsApp on iOS:', error));
-  };
-
+const ChatScreen = () => {
   return (
-    <View>
-      <TextInput
-        placeholder="Enter your message"
-        value={message}
-        onChangeText={setMessage}
-      />
-      <Button title="Send WhatsApp Message" onPress={sendWhatsAppMessage} />
+    <View style={styles.container}>
+      <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>
+      <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default ChatScreen;
