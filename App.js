@@ -10,6 +10,7 @@ import ProfileScreen from "./ProfileScreen";
 import GuideScreen from "./GuideScreen";
 import Chat from "./ChatScreen";
 import ArticleDetails from './ArticleDetails';
+import EntryScreen from './EntryScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -17,6 +18,10 @@ export default function App() {
     <GluestackUIProvider config={config}>
       <NavigationContainer>
         <Stack.Navigator>
+              <Stack.Screen
+                name="Entry"
+                component={EntryScreen}
+              />
               {/* HomeScreen */}
               <Stack.Screen
                 name="Home"
