@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
-import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
-
+import {Alert, Button, Linking, StyleSheet, View, TextInput, Text} from 'react-native';
+import { useState } from 'react';
 const supportedURL = 'https://wa.me/447484823438?text=I%27m%20interested%20in%20your%20car%20for%20sale';
 
 const unsupportedURL = 'slack://open?team=123456';
@@ -23,10 +23,21 @@ const OpenURLButton = ({url, children}) => {
 };
 
 const ChatScreen = () => {
+  const [message, setMessage] = useState('');
+
   return (
     <View style={styles.container}>
-      <OpenURLButton url={supportedURL}>Open Supported URL</OpenURLButton>
-      <OpenURLButton url={unsupportedURL}>Open Unsupported URL</OpenURLButton>
+      <Text style={{
+        fontSize: 20, 
+      }}
+      >Sending a message to: Kiran</Text>
+      <TextInput
+        placeholder="Enter your message"
+        value={message}
+        onChangeText={setMessage}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%',}}
+      />
+      <OpenURLButton url={supportedURL}>Send in Whatsapp</OpenURLButton>
     </View>
   );
 };
@@ -34,7 +45,7 @@ const ChatScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
 });
