@@ -10,7 +10,8 @@ import ProfileScreen from "./ProfileScreen";
 import GuideScreen from "./GuideScreen";
 import Chat from "./ChatScreen";
 import ArticleDetails from './ArticleDetails';
-import EntryScreen from './EntryScreen';
+import Login from './Login';
+import Signup from './Signup';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -19,8 +20,12 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
               <Stack.Screen
-                name="Entry"
-                component={EntryScreen}
+                name="Login"
+                component={Login}
+              />
+              <Stack.Screen
+                name="Signup"
+                component={Signup}
               />
               {/* HomeScreen */}
               <Stack.Screen

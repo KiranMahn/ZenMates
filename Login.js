@@ -35,6 +35,9 @@ const EntryScreen = ({navigation}) => {
       
       <Button
       title="Don't have an account? Signup here"
+      onPress={() => {
+        navigation.navigate('Signup')
+      }}
       >
       </Button>
     </View>
