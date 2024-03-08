@@ -32,6 +32,6 @@ const sshConnection = new Promise((resolve, reject) => {
 	  host: 'cafe.cis.strath.ac.uk',
 	  port: 22,
 	  username: 'ckb23158', //student number eg 'ckb....'
-	  password: 'x#yu4cYF%_-7JDx' //uni password
+	  password: '' //uni password
 	});
 });
