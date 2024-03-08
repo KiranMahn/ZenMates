@@ -37,7 +37,10 @@ const DiscussionBoard = ({navigation, route}) => {
     <SafeAreaView style={{flex: 1}}>
       <View style={{width: '100%', height: '100%', backgroundColor: 'white',}}>
         <Text style={{alignSelf: 'center', margin: '5%', fontSize:30, fontWeight:'bold'}}>Discussion Board</Text>
-        <Button title="create a post" onPress={navigation.navigate('CreatePost')}/>
+        <View style={{display: 'flex', flexDirection: 'row', height: '8%', alignItems: 'center', justifyContent: 'center', backgroundColor: 'aliceblue', width: '50%', alignSelf: 'center', borderRadius: 20, padding: 5}}>
+          <Image source={require('./assets/add.png')}/>
+          <Button title="create a post" onPress={() => navigation.navigate('CreatePost')}/>
+        </View>
         <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', padding: 10, marginBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
           {listComponents}
           
