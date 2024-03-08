@@ -27,7 +27,7 @@ const ProfileScreen = ({navigation, route}) => {
             <Text style={{width: '70%', fontSize: 20}}>6 days</Text>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
-            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Hoes: </Text>
+            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Medals: </Text>
             <Text style={{width: '70%', fontSize: 20}}>0</Text>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
@@ -35,12 +35,12 @@ const ProfileScreen = ({navigation, route}) => {
             <Text style={{width: '70%', fontSize: 20}}>0</Text>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
-            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Looks: </Text>
-            <Text style={{width: '70%', fontSize: 20}}>-1</Text>
+            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Points: </Text>
+            <Text style={{width: '70%', fontSize: 20}}>0</Text>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
-            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Personality: </Text>
-            <Text style={{width: '70%', fontSize: 20}}>:/</Text>
+            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>DOB: </Text>
+            <Text style={{width: '70%', fontSize: 20}}>00/00/0000</Text>
           </View>
         </View>
 
