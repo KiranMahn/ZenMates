@@ -22,7 +22,7 @@ const DiscussionBoard = ({navigation, route}) => {
     listComponents.push(
           <TouchableOpacity key={data.articles[i]["id"]} style={{display:'flex', flex: 1, width: '100%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 10, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}} onPress={() => handleClick(data.articles[i]["id"])}>
             <View>
-              <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
+              <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
             </View>
             <View style={{flexDirection: 'col', height: '100%', flex: 1}}>
               <Text style={{fontSize: 20, margin: 10, fontWeight: 'bold', flex: 1}}>{data.articles[i]["title"]}</Text>

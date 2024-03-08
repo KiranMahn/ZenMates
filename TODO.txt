@@ -6,5 +6,5 @@ mindfullnes app:
 
 - mindfullness docs (maybe meditation)  FRONTEND DONE
 - whatsapp sdk to communicate           FRONTEND DONE
-- daily forum discussion board
+- daily forum discussion board          FRONTEND DONE
 
