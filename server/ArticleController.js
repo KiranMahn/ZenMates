@@ -8,8 +8,9 @@ const Article = function(article){
   this.Body = article.body;
 };
 
+
 const ArticleCount = () => {
-  sql.query("SELECT `articleID` FROM `articles`;", function(err, result, fields) {
+  sql.query("SELECT `articleID` FROM articles", (err, result) => {
     if (err) throw err;
     return (result);
   });
@@ -17,3 +18,4 @@ const ArticleCount = () => {
 };
 
 //export default ArticleCount;
+module.exports = ArticleCount;

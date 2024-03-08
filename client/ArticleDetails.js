@@ -1,13 +1,11 @@
 import { Text, View, Image } from "react-native";
 import { getArticleById } from "./Requests";
-import {ArticleCount} from "./../server/ArticleController.js";
 /* Contains a list of mindfulness mini articles */
 
 const ArticleDetails = ({navigation, route}) => {
 
     const { itemId } = route.params;
     let data = getArticleById(itemId);
-    console.log(ArticleCount());
     return (
         <View style={{width: '100%', height: '100%', backgroundColor: 'white', padding: 10}}>
             <Text style={{fontSize: 40, textAlign: 'center', fontWeight: 'bold', margin: 10}}>{data["title"]}</Text>
