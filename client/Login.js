@@ -17,13 +17,13 @@ const EntryScreen = ({navigation}) => {
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '70%', height: '8%', alignSelf: 'center', fontSize: 20}}
       />
       <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '70%', height: '8%', alignSelf: 'center', fontSize: 20, marginBottom:  20}}
       />
       
       <Button

@@ -1,6 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import NavBar from './NavBar';
 import { GluestackUIProvider} from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,9 +6,11 @@ import {HomeScreen} from './HomeScreen';
 import ProfileScreen from "./ProfileScreen";
 import GuideScreen from "./GuideScreen";
 import Chat from "./ChatScreen";
+import CreatePost from './CreatePost';
 import ArticleDetails from './ArticleDetails';
 import Login from './Login';
 import Signup from './Signup';
+import DiscussionBoard from './DiscussionBoard';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -52,6 +51,16 @@ export default function App() {
                 name="ArticleDetails" 
                 component={ArticleDetails} 
                 initialParams={{itemId: 0}}
+              />
+              {/* Discussion Board */}
+              <Stack.Screen 
+                name="DiscussionBoard" 
+                component={DiscussionBoard} 
+                initialParams={{itemId: 0}}
+              />
+              <Stack.Screen 
+                name="CreatePost" 
+                component={CreatePost} 
               />
 
         </Stack.Navigator>

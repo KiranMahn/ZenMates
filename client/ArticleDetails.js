@@ -6,6 +6,7 @@ const ArticleDetails = ({navigation, route}) => {
 
     const { itemId } = route.params;
     let data = getArticleById(itemId);
+    
     return (
         <View style={{width: '100%', height: '100%', backgroundColor: 'white', padding: 10}}>
             <Text style={{fontSize: 40, textAlign: 'center', fontWeight: 'bold', margin: 10}}>{data["title"]}</Text>
