@@ -2,7 +2,7 @@ import { Image, Pressable, Text, TextInput, TouchableOpacity, View } from "react
 import { useState } from "react";
 import { Button } from "@gluestack-ui/themed";
 
-const CreatePost = () => {
+const CreatePost = ({navigation}) => {
     const [title, setTitle] = useState();
     const [postBody, setPostBody] = useState();
 
@@ -24,7 +24,7 @@ const CreatePost = () => {
                     style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '80%', height: '70%', alignSelf: 'center', fontSize: 20, flexWrap: 'wrap', textAlignVertical: 'top'}}
                 />
             </View>
-            <Button style={{width: '50%', borderRadius: 25, margin: 20}}>
+            <Button style={{width: '50%', borderRadius: 25, margin: 20}} onPress={() => navigation.navigate('DiscussionBoard')}>
                 <Text style={{color: 'white', fontSize: 20, fontWeight: 700}}>Post</Text>
             </Button>
 
