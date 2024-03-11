@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: devweb2023.cis.strath.ac.uk:3306
--- Generation Time: Mar 05, 2024 at 07:41 PM
+-- Generation Time: Mar 11, 2024 at 06:28 PM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `MADApp`
+-- Database: `maddb`
 --
 
 -- --------------------------------------------------------
@@ -40,8 +40,21 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`articleID`, `title`, `image`, `description`, `body`) VALUES
-(1, 'Breathing', NULL, 'this is an article about breathing', 'breath better idk'),
-(2, 'Meditation', NULL, 'this is an article about meditation', 'just meditate lol');
+(1, 'Breathing', './assets/chatIcon.png', 'this is an article about breathing', 'breath better idk'),
+(2, 'Meditation', './assets/bookIcon.png', 'this is an article about meditation', 'just meditate lol');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discussionBoard`
+--
+
+CREATE TABLE `discussionBoard` (
+  `postID` int NOT NULL,
+  `author` int NOT NULL,
+  `title` int NOT NULL,
+  `body` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -66,6 +79,27 @@ CREATE TABLE `profiles` (
 INSERT INTO `profiles` (`profileID`, `firstName`, `lastName`, `dob`, `gender`, `username`, `email`) VALUES
 (1, 'Noah', 'Castaneda', '13-09-2002', 'Male', 'noahc', 'noah@mad.com');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userStats`
+--
+
+CREATE TABLE `userStats` (
+  `userID` int NOT NULL,
+  `streak` int NOT NULL DEFAULT '0',
+  `medals` int NOT NULL DEFAULT '0',
+  `friends` int NOT NULL DEFAULT '0',
+  `points` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `userStats`
+--
+
+INSERT INTO `userStats` (`userID`, `streak`, `medals`, `friends`, `points`) VALUES
+(1, 10, 82, 5, 1250);
+
 --
 -- Indexes for dumped tables
 --
@@ -75,6 +109,14 @@ INSERT INTO `profiles` (`profileID`, `firstName`, `lastName`, `dob`, `gender`, `
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`articleID`),
+  ADD UNIQUE KEY `articleID` (`articleID`),
+  ADD UNIQUE KEY `title` (`title`);
+
+--
+-- Indexes for table `discussionBoard`
+--
+ALTER TABLE `discussionBoard`
+  ADD PRIMARY KEY (`postID`),
   ADD UNIQUE KEY `title` (`title`);
 
 --
@@ -82,7 +124,16 @@ ALTER TABLE `articles`
 --
 ALTER TABLE `profiles`
   ADD PRIMARY KEY (`profileID`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `profileID` (`profileID`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `userStats`
+--
+ALTER TABLE `userStats`
+  ADD PRIMARY KEY (`userID`),
+  ADD UNIQUE KEY `userID` (`userID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -93,6 +144,12 @@ ALTER TABLE `profiles`
 --
 ALTER TABLE `articles`
   MODIFY `articleID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `discussionBoard`
+--
+ALTER TABLE `discussionBoard`
+  MODIFY `postID` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `profiles`

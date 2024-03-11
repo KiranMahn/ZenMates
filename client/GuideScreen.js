@@ -1,20 +1,20 @@
 import { Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView } from "react-native";
-import { getArticlesData } from "./Requests";
+import { getGuideData } from "./Requests";
 import { Component } from "react";
 /* Contains a list of mindfulness mini articles */
-
-
 
 const GuideScreen = ({navigation, route}) => {
 
   // get data for all articles
-  let data = getArticlesData();
+  let data = getGuideData();
+  //console.log(data);
 
   let listComponents = [];
 
   const handleClick = (id) => {
     navigation.navigate('ArticleDetails', {itemId: id})
   }
+
 
 
   for(let i = 0; i < data.articles.length; i++) {
@@ -32,19 +32,19 @@ const GuideScreen = ({navigation, route}) => {
           </TouchableOpacity>
     );
   }
-  
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{width: '100%', height: '100%', backgroundColor: 'white',}}>
         <Text style={{alignSelf: 'center', margin: '5%', fontSize:30, fontWeight:'bold'}}>Guide to mindfulness</Text>
         <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', padding: 10, marginBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
           {listComponents}
-          
+
         </ScrollView>
       </View>
     </SafeAreaView>
-    
-    
+
+
   );
 };
 

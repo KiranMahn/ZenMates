@@ -22,15 +22,51 @@ app.listen(8081, () => {
   console.log("server is running on 8081");
 });
 
-app.get("/getarticlenumber", (req, res) => {
+app.get("/getguidedata", (req, res) => {
 
-  dbConfig.query("SELECT `articleID` FROM articles", (err, result) => {
+  dbConfig.query("SELECT * FROM articles", (err, result) => {
     if (err) throw err;
-    numArticles = result.length
-    console.log(result.length);
-    return res.json(numArticles);
+    //numArticles = result.length
+    //console.log(result.length);
+    return res.json(result);
 
   });
 
   //return article.ArticleCount;
+});
+
+app.get("/getarticledata/:id", (req, res) => {
+  const artid = req.params.id;
+  dbConfig.query(`SELECT * FROM articles WHERE \`articleID\` = \'${artid}\'`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
+});
+
+app.get("/getprofile/:id", (req, res) => {
+  const uname = req.params.id;
+  dbConfig.query(`SELECT * FROM profiles WHERE \`username\` = \'${uname}\'`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
+});
+
+app.get("/getpost/:id", (req, res) => {
+  const postid = req.params.id;
+  dbConfig.query(`SELECT * FROM discussionBoard WHERE \`postID\` = \'${postid}\'`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
+});
+
+app.get("/getstats/:id", (req, res) => {
+  const userid = req.params.id;
+  dbConfig.query(`SELECT * FROM userStats WHERE \`userID\` = \'${userid}\'`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
 });

@@ -6,4 +6,4 @@ module.exports = {
 };
 
 //command to ssh to cafe (uses port forwarding)
-//ssh -L 3306:devweb2023.cis.strath.ac.uk:3306 ckb23158@cafe.cis.strath.ac.uk
+//ssh -L 3306:devweb2023.cis.strath.ac.uk:3306 yourstudent#@cafe.cis.strath.ac.uk
