@@ -18,8 +18,8 @@ app.get("/", (req, res) => {
   return res.json("sql server connection");
 });
 
-app.listen(8081, () => {
-  console.log("server is running on 8081");
+app.listen(8082, () => {
+  console.log("server is running on 8082");
 });
 
 app.get("/getguidedata", (req, res) => {

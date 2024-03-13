@@ -1,100 +1,28 @@
 import React, { useEffect, useState } from "react";
 
 
-const getGuideData = () => {
+async function getGuideData()  {
 
     //fetch from server site /getguidedata
     //const [data, setData] = useState([])
     let data = { articles: []};
-    return fetch('http://localhost:8081/getguidedata/')
+    await fetch('http://localhost:8082/getguidedata/')
       .then(result => result.json())
       .then(jsonData => {
         data.articles = jsonData;
-        console.log(data);
+        console.log("data in requests: ")
+        console.log(JSON.stringify(data));
         return data;
       })
       .catch(err => {
         console.log(err);
         return data;
       });
-  console.log(data);
-  return data;
-    /*
-    let data = {
-        articles: [
-                {
-                    "title": 'Breathing exercises',
-                    "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'This calming breathing technique for stress, anxiety and panic takes just a few minutes and can be done anywhere.',
-                    "textBody": "textBody",
-                    "id": '0'
-                },
-                {
-                    "title": 'Connect with others',
-                    "image": './assets/bookIcon.png', // find better way to store images?
-                    "shortDesc": 'Good relationships are important for your mental wellbeing',
-                    "textBody": "textBody",
-                    "id": '1'
-                },
-                {
-                    "title": 'Breathing Excercises',
-                    "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'Work on your breathwork to reduce stress',
-                    "textBody": "textBody",
-                    "id": '2'
-                },
-                {
-                    "title": 'Be physically active',
-                    "image": './assets/bookIcon.png', // find better way to store images?
-                    "shortDesc": 'Being active is not only great for your physical health and fitness.',
-                    "textBody": "textBody",
-                    "id": '3'
-                },
-                {
-                    "title": 'Learn new skills',
-                    "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'Research shows that learning new skills can also improve your mental wellbeing',
-                    "textBody": "textBody",
-                    "id": '4'
-                },
-                {
-                    "title": 'Give to others',
-                    "image": './assets/bookIcon.png', // find better way to store images?
-                    "shortDesc": 'Research suggests that acts of giving and kindness can help improve your mental wellbeing',
-                    "textBody": "textBody",
-                    "id": '5'
-                },
-                {
-                    "title": 'Pay attention to the present moment',
-                    "image": './assets/chatIcon.png', // find better way to store images?
-                    "shortDesc": 'Paying more attention to the present moment can improve your mental wellbeing.',
-                    "textBody": "textBody",
-                    "id": '6'
-                },
-            ]
-
-        }
-        return data;*/
+    return data;
 }
 
 
 const getArticleById = (id) => {
-
-
-  /*
-  get article data by article ID
-
-  useEffect () =>{
-    fetch(`localhost:8081/getarticledata/${id}`)
-    .then(result =>{
-      let data = result;
-  });
-
-}
-  return data;
-}
-
-  */
 
     if(id == 0) {
         return (

@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import ProfileScreen from "./ProfileScreen";
 
 const HomeScreen = ({navigation}) => {
+
     return (
         <View>
             <View style={styles.container}>
