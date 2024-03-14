@@ -2,7 +2,7 @@ import NavBar from "./NavBar";
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import ProfileScreen from "./ProfileScreen";
-
+import { useState } from "react";
 const HomeScreen = ({navigation}) => {
     const [user, setUser] = useState();
 
