@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import ProfileScreen from "./ProfileScreen";
 
 const HomeScreen = ({navigation}) => {
+    const [user, setUser] = useState();
 
     return (
         <View>
@@ -14,7 +15,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="My Profile"
                         onPress={() => {
-                            navigation.navigate('Profile', {name: 'John'})
+                            navigation.navigate('Profile', {user: user})
                         }}>
                         <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}> My Profile</Text>
@@ -24,7 +25,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="Mindfulness Guide"
                         onPress={() => {
-                            navigation.navigate('GuideScreen', {name: 'John'})
+                            navigation.navigate('GuideScreen', {user: user})
                         }}>
                         <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Mindfulness Guide</Text>
@@ -34,7 +35,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="Chat"
                         onPress={() => {
-                            navigation.navigate('Chat', {name: 'John'})
+                            navigation.navigate('Chat', {user: user})
                         }}>
                         <Image source={require('./assets/chatIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Chat</Text>

@@ -1,6 +1,8 @@
 import { Text, View, Image, Pressable } from "react-native";
 
 const ProfileScreen = ({navigation, route}) => {
+    let user = route.params.user;
+    
     return (
       <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
         <View style={{width:"100%", height:"20%", display: "flex", justifyContent: 'space-around', alignItems: 'center'}}>

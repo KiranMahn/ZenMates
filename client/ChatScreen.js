@@ -23,7 +23,9 @@ const OpenURLButton = ({url, children}) => {
   return <Button title={children} onPress={handlePress} />;
 };
 
-const ChatScreen = () => {
+const ChatScreen = ({navigation, route}) => {
+  let user = route.params.user;
+
   const [message, setMessage] = useState('');
   const [selected, setSelected] = useState('');
 
