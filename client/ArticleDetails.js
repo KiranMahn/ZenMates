@@ -34,6 +34,14 @@ const ArticleDetails = ({navigation, route}) => {
     navigation.navigate('ArticleDetails', {itemId: id})
   }
 
+  const getSrc = (id) => {
+    switch(id) {
+        case 0:
+            return require('./assets/bookIcon.png')
+        case 1:
+            return require('./assets/chatIcon.png')
+    }
+  }
 
   if(data != null) {
     console.log("data not null: ");

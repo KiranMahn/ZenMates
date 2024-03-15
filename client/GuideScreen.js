@@ -4,6 +4,7 @@ import { Component, useEffect, useState } from "react";
 /* Contains a list of mindfulness mini articles */
 
 const GuideScreen = ({navigation, route}) => {
+  let user = route.params.user;
   const [data, setData] = useState();
 
   // get data for all articles
