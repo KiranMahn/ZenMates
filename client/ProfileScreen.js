@@ -3,6 +3,7 @@ import { Text, View, Image, Pressable, TextInput } from "react-native";
 import { ScrollView } from "react-native";
 
 const ProfileScreen = ({navigation, route}) => {
+    let user = route.params.user;
     const [editMode, setEditMode] = useState(false);
     const [editColor, setEditColor] = useState('white');
     const [editIcon, setEditIcon] = useState(require('./assets/pen.png'));
@@ -66,10 +67,10 @@ const ProfileScreen = ({navigation, route}) => {
           </Pressable>
         </View>
       </View>
-      
-      
+
+
     );
-    
+
   }
 
 export default ProfileScreen;

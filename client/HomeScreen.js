@@ -2,8 +2,10 @@ import NavBar from "./NavBar";
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import ProfileScreen from "./ProfileScreen";
+import { useState } from "react";
+const HomeScreen = ({navigation, route}) => {
+    const [userID, setUserid] = useState(route.params.id);
 
-const HomeScreen = ({navigation}) => {
     return (
         <View>
             <View style={styles.container}>
@@ -25,18 +27,18 @@ const HomeScreen = ({navigation}) => {
                             }}
                             title=""
                             onPress={() => {
-                                navigation.navigate('Profile', {name: 'John'})
+                                navigation.navigate('Profile', {userID: userID})
                             }}>
                             <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         </Pressable>
                     </View>
-                    
+
                     {/* Mindfulness Guide button */}
                     <Pressable
                         style={styles.pageButton}
                         title="Mindfulness Guide"
                         onPress={() => {
-                            navigation.navigate('GuideScreen', {name: 'John'})
+                            navigation.navigate('GuideScreen', {userID: userID})
                         }}>
                         <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Mindfulness Guide</Text>
@@ -46,7 +48,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="Chat"
                         onPress={() => {
-                            navigation.navigate('Chat', {name: 'John', articleID: 1})
+                            navigation.navigate('Chat', {userID: userID})
                         }}>
                         <Image source={require('./assets/chatIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Chat</Text>
@@ -56,7 +58,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="Chat"
                         onPress={() => {
-                            navigation.navigate('DiscussionBoard', {name: 'John'})
+                            navigation.navigate('DiscussionBoard', {userID: userID})
                         }}>
                         <Image source={require('./assets/blog.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Discussion Board</Text>
