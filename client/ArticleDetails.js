@@ -1,12 +1,11 @@
 import { Text, View, Image } from "react-native";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 /* Contains a list of mindfulness mini articles */
 
 const ArticleDetails = ({navigation, route}) => {
   let itemId = route.params.itemId;
   const [data, setData] = useState();
-  console.log(itemId);
+  //console.log(itemId);
   // get data for all articles
   useEffect(() => {
     const loadData = async () => {
@@ -15,8 +14,8 @@ const ArticleDetails = ({navigation, route}) => {
       .then(result => result.json())
       .then(jsonData => {
         thisdata.articles = jsonData;
-        console.log("data in requests: ")
-        console.log(JSON.stringify(thisdata));
+        //console.log("data in requests: ")
+        //console.log(JSON.stringify(thisdata));
         setData(thisdata);
       })
       .catch(err => {
@@ -26,7 +25,7 @@ const ArticleDetails = ({navigation, route}) => {
     loadData();
 
   }, []);
-  console.log(data);
+  //console.log(data);
 
   let listComponents = [];
 
@@ -44,11 +43,11 @@ const ArticleDetails = ({navigation, route}) => {
   }
 
   if(data != null) {
-    console.log("data not null: ");
-    console.log(data);
+    //console.log("data not null: ");
+    //console.log(data);
     let image = data.articles[0]["image"];
     listComponents.push(
-      <View style={{width: '100%', height: '100%', backgroundColor: 'white', padding: 10}}>
+      <View style={{width: '100%', height: '100%', backgroundColor: 'white', padding: 10}} key={itemId}>
           <Text style={{fontSize: 40, textAlign: 'center', fontWeight: 'bold', margin: 10}}>{data.articles[0]["title"]}</Text>
           <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 30,}}/>
           <Text style={{textAlign: 'justify', padding: 15, fontSize: 20}}>{data.articles[0]["body"]}</Text>

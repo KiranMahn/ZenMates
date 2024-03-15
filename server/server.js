@@ -70,3 +70,13 @@ app.get("/getstats/:id", (req, res) => {
 
   });
 });
+
+app.get("/loginform/:uname/:pass", (req, res) => {
+  const username = req.params.uname;
+  const password = req.params.pass;
+  dbConfig.query(`SELECT profileID FROM profiles WHERE \`username\` = \'${username}\' AND \`password\` = \'${password}\'`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
+});
