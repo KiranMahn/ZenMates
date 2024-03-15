@@ -3,8 +3,8 @@ import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import ProfileScreen from "./ProfileScreen";
 import { useState } from "react";
-const HomeScreen = ({navigation}) => {
-    const [user, setUser] = useState();
+const HomeScreen = ({navigation, route}) => {
+    const [userID, setUserid] = useState(route.params.id);
 
     return (
         <View>
@@ -15,7 +15,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="My Profile"
                         onPress={() => {
-                            navigation.navigate('Profile', {user: user})
+                            navigation.navigate('Profile', {userID: userID})
                         }}>
                         <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}> My Profile</Text>
@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="Mindfulness Guide"
                         onPress={() => {
-                            navigation.navigate('GuideScreen', {user: user})
+                            navigation.navigate('GuideScreen', {userID: userID})
                         }}>
                         <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Mindfulness Guide</Text>
@@ -35,18 +35,18 @@ const HomeScreen = ({navigation}) => {
                         style={styles.pageButton}
                         title="Chat"
                         onPress={() => {
-                            navigation.navigate('Chat', {user: user})
+                            navigation.navigate('Chat', {userID: userID})
                         }}>
                         <Image source={require('./assets/chatIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Chat</Text>
                     </Pressable>
-                        
-                    
+
+
                 </View>
-                
+
             </View>
         </View>
-        
+
     );
 }
 

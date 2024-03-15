@@ -13,7 +13,7 @@ const EntryScreen = ({navigation}) => {
       console.log("data in requests: ")
       console.log(JSON.stringify(jsonData));
       setData(jsonData);
-      navigation.navigate('Home', {name: jsonData[0]["profileID"]});
+      navigation.navigate('Home', {id: jsonData[0]["profileID"]});
     })
     .catch(err => {
       console.log(err);
@@ -57,7 +57,7 @@ const EntryScreen = ({navigation}) => {
       title="Login"
       //onPress={() => handleLogin()}
       onPress={ () =>{
-        navigation.navigate('Home', {name: "Noah"});
+        navigation.navigate('Home', {id: 0});
       }}>
       </Button>
 
