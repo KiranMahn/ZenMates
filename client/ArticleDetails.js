@@ -35,6 +35,14 @@ const ArticleDetails = ({navigation, route}) => {
     navigation.navigate('ArticleDetails', {itemId: id})
   }
 
+  const getSrc = (id) => {
+    switch(id) {
+        case 0:
+            return require('./assets/bookIcon.png')
+        case 1:
+            return require('./assets/chatIcon.png')
+    }
+  }
 
   if(data != null) {
     console.log("data not null: ");
@@ -44,7 +52,7 @@ const ArticleDetails = ({navigation, route}) => {
       listComponents.push(
         <View style={{width: '100%', height: '100%', backgroundColor: 'white', padding: 10}}>
             <Text style={{fontSize: 40, textAlign: 'center', fontWeight: 'bold', margin: 10}}>{data.articles[0]["title"]}</Text>
-            <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 30,}}/>
+            <Image source={getSrc(id)} style={{alignSelf: 'center', margin: 30,}}/>
             <Text style={{textAlign: 'justify', padding: 15, fontSize: 20}}>{data.articles[0]["textBody"]}</Text>
         </View>
       );
