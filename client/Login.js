@@ -55,7 +55,10 @@ const EntryScreen = ({navigation}) => {
 
       <Button
       title="Login"
-      onPress={() => handleLogin()}>
+      //onPress={() => handleLogin()}
+      onPress={ () =>{
+        navigation.navigate('Home', {name: "Noah"});
+      }}>
       </Button>
 
       <Button
