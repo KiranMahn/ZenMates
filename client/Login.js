@@ -17,6 +17,7 @@ const EntryScreen = ({navigation}) => {
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
+        autoCapitalize='none'
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
