@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: devweb2023.cis.strath.ac.uk:3306
--- Generation Time: Mar 11, 2024 at 06:28 PM
+-- Generation Time: Mar 15, 2024 at 11:45 AM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `maddb`
+-- Database: `ckb23158`
 --
 
 -- --------------------------------------------------------
@@ -40,8 +40,10 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`articleID`, `title`, `image`, `description`, `body`) VALUES
-(1, 'Breathing', './assets/chatIcon.png', 'this is an article about breathing', 'breath better idk'),
-(2, 'Meditation', './assets/bookIcon.png', 'this is an article about meditation', 'just meditate lol');
+(0, 'Breathing', './assets/chatIcon.png', 'this is an article about breathing', 'breath better idk'),
+(1, 'Meditation', './assets/bookIcon.png', 'this is an article about meditation', 'just meditate lol'),
+(2, 'Verbal Meditation', './assets/chatIcon.png', 'Out loud meditation', 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus'),
+(3, 'Breathing exercises for stress', './assets/bookIcon.png', 'Learn to be thoughtful towards yourself and others', 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus');
 
 -- --------------------------------------------------------
 
@@ -69,15 +71,16 @@ CREATE TABLE `profiles` (
   `dob` varchar(10) NOT NULL,
   `gender` set('Male','Female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `username` varchar(64) NOT NULL,
-  `email` varchar(256) NOT NULL
+  `email` varchar(256) NOT NULL,
+  `password` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `profiles`
 --
 
-INSERT INTO `profiles` (`profileID`, `firstName`, `lastName`, `dob`, `gender`, `username`, `email`) VALUES
-(1, 'Noah', 'Castaneda', '13-09-2002', 'Male', 'noahc', 'noah@mad.com');
+INSERT INTO `profiles` (`profileID`, `firstName`, `lastName`, `dob`, `gender`, `username`, `email`, `password`) VALUES
+(1, 'Noah', 'Castaneda', '13-09-2002', 'Male', 'noahc', 'noah@mad.com', '1234asdf');
 
 -- --------------------------------------------------------
 
@@ -143,7 +146,7 @@ ALTER TABLE `userStats`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `articleID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `articleID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `discussionBoard`
