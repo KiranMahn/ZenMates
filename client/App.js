@@ -11,6 +11,7 @@ import ArticleDetails from './ArticleDetails';
 import Login from './Login';
 import Signup from './Signup';
 import DiscussionBoard from './DiscussionBoard';
+import ChooseContact from './ChooseContact';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
                 name="Login"
                 component={Login}
               />
+              {/* Signup */}
               <Stack.Screen
                 name="Signup"
                 component={Signup}
@@ -58,9 +60,15 @@ export default function App() {
                 component={DiscussionBoard} 
                 initialParams={{itemId: 0}}
               />
+              {/* Create Post */}
               <Stack.Screen 
                 name="CreatePost" 
                 component={CreatePost} 
+              />
+              {/* Choose Contact */}
+              <Stack.Screen 
+                name="ChooseContact" 
+                component={ChooseContact} 
               />
 
         </Stack.Navigator>

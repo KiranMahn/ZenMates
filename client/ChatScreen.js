@@ -28,7 +28,7 @@ const ChatScreen = ({navigation, route}) => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails],
+          fields: [Contacts.Fields.PhoneNumbers],
         });
 
         if (data.length > 0) {
@@ -64,10 +64,18 @@ const ChatScreen = ({navigation, route}) => {
   
   return (
     <View style={styles.container}>
-      <Text style={{
-        fontSize: 20, 
-      }}
-      >Sending a message to: Kiran</Text>
+      <View>
+        <Text style={{
+          fontSize: 20, 
+        }}
+        >Sending a message to: </Text>
+        <TouchableOpacity>
+          <Text
+          onPress={() => navigation.navigate('ChooseContact')}
+          >Choose a contact</Text>
+        </TouchableOpacity>
+      </View>
+      
       <Text>Choose a prompt: </Text>
       <View>
         <TouchableOpacity
