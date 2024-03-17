@@ -50,6 +50,7 @@ const EntryScreen = ({navigation}) => {
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        autoCapitalize={"none"}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '70%', height: '8%', alignSelf: 'center', fontSize: 20, marginBottom:  20}}
       />
 

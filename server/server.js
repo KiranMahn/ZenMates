@@ -81,7 +81,7 @@ app.get("/loginform/:uname/:pass", (req, res) => {
   });
 });
 
-app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/", (req, res) => {
+app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => {
   const firstName = req.params.fname;
   const lastName = req.params.lname;
   const dateOfBirth = req.params.dob;
@@ -89,15 +89,33 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/", (req, res) => {
   const username = req.params.uname;
   const email = req.params.eml;
   const password = req.params.pass;
+  const phoneNum = req.params.phn;
   let isEmail = 0;
   let isUsername = 0;
-  dbConfig.query(`SELECT * FROM profiles WHERE \`email\` = \'${email}\' OR \`username\` = \'${username}\'`, (err, result) => {
+  let isPhone = 0;
+  dbConfig.query(`SELECT * FROM profiles WHERE \`email\` = \'${email}\' OR \`username\` = \'${username}\' OR \`phone\` = \'${phoneNum}\'`, (err, result) => {
     if (err) throw err;
     if (result.length < 1) {
       isEmail = 0;
+      isUsername = 0;
+      isPhone = 0;
+    }else if (result[0].email == email && result[0].username == username && result[0].phone == phoneNum) {
+      isEmail ++;
+      isUsername ++;
+      isPhone ++;
+      return res.json("email username phone");
     }else if (result[0].email == email && result[0].username == username) {
       isEmail ++;
+      isUsername ++;
       return res.json("email and username");
+    }else if (result[0].email == email && result[0].phone == phoneNum) {
+      isEmail ++;
+      isPhone ++;
+      return res.json("email and phone");
+    }else if (result[0].username == username && result[0].phone == phoneNum) {
+      isUsername ++;
+      isPhone ++;
+      return res.json("username and phone");
     }else if(result[0].email == email) {
       isEmail ++;
       console.log("email exists")
@@ -105,10 +123,13 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/", (req, res) => {
     }else if(result[0].username == username){
       isUsername ++;
       return res.json("username");
+    }else if(result[0].phone == phoneNum){
+      isPhone ++;
+      return res.json("phone");
     }
   });
-  if (isUsername < 1 && isEmail < 1) {
-    dbConfig.query(`INSERT INTO profiles (\`firstName\`, \`lastName\`, \`dob\`, \`gender\`, \`username\`, \`email\`, \`password\`) VALUES (\'${firstName}\', \'${lastName}\', \'${dateOfBirth}\', \'${gender}\', \'${username}\', \'${email}\', \'${password}\')`, (err, result) => {
+  if (isUsername < 1 && isEmail < 1 && isPhone < 1) {
+    dbConfig.query(`INSERT INTO profiles (\`firstName\`, \`lastName\`, \`dob\`, \`gender\`, \`username\`, \`email\`, \`password\`, \`phone\`) VALUES (\'${firstName}\', \'${lastName}\', \'${dateOfBirth}\', \'${gender}\', \'${username}\', \'${email}\', \'${password}\', \'${phoneNum}\')`, (err, result) => {
       if (err) throw err;
       return res.json("Success!");
     });

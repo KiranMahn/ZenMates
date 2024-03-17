@@ -1,12 +1,44 @@
 import { View, Text, Button, StyleSheet, ButtonText, TextInput } from "react-native";
 import { useState } from "react";
 const EntryScreen = ({navigation}) => {
-  const [name, setName] = useState()
-  const [age, setAge] = useState()
+  const [firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState()
+  const [dob, setDOB] = useState()
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [email, setEmail] = useState()
   const [phoneNum, setPhoneNum] = useState()
+  const [gender, setGender] = useState()
+  const [data, setData] = useState();
+
+
+  const loadData = async () => {
+    await fetch(`http://localhost:8082/signup/${firstName}/${lastName}/${dob}/${gender}/${username}/${email}/${password}/${phoneNum}/`)
+    .then(result => result.json())
+    .then(jsonData => {
+      console.log("data in requests: ")
+      console.log(JSON.stringify(jsonData));
+      setData(jsonData);
+      /*
+      if data = username / email / phone etc, show error on signup page
+      server handles duplicates and returns either, success or an error based on what is duplicated
+      */
+      navigation.navigate('Login'); //fix this navigation
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
+  const handleSignUp = () => {
+    try {
+      loadData();
+      //console.log(data);
+    } catch (e) {
+      console.log(err);
+    }
+  }
+
 
   return (
     <View style={{
@@ -17,28 +49,28 @@ const EntryScreen = ({navigation}) => {
       alignSelf: 'flex-start',
       marginTop: 1,
       }}>
-        <TextInput
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
+      <TextInput
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
-        placeholder="Age"
-        value={age}
-        onChangeText={setAge}
+        placeholder="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="Date of Birth (dd-mm-yyyy)"
+        value={dob}
+        onChangeText={setDOB}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
+        placeholder="Gender"
+        value={gender}
+        onChangeText={setGender}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
@@ -48,28 +80,44 @@ const EntryScreen = ({navigation}) => {
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize={"none"}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+      />
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize={"none"}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+      />
+      <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        autoCapitalize={"none"}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
       <TextInput
         placeholder="Re-enter password"
         value={password}
         onChangeText={setPassword}
+        autoCapitalize={"none"}
         style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
       />
-      
+
       <Button
       title="Sign up"
       onPress={() => {
-        navigation.navigate('Home', {name: 'John'})
+        handleSignUp();
       }}>
       </Button>
-      
+
     </View>
   );
-    
+
 }
 
 export default EntryScreen;
