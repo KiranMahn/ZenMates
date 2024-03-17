@@ -9,7 +9,8 @@ const EntryScreen = ({navigation}) => {
   const [email, setEmail] = useState()
   const [phoneNum, setPhoneNum] = useState()
   const [gender, setGender] = useState()
-  const [data, setData] = useState();
+  const [data, setData] = useState()
+  const [duplicateError, setDuplicateError] = useState()
 
 
   const loadData = async () => {
@@ -18,12 +19,36 @@ const EntryScreen = ({navigation}) => {
     .then(jsonData => {
       console.log("data in requests: ")
       console.log(JSON.stringify(jsonData));
-      setData(jsonData);
+      let returnData = JSON.stringify(jsonData);
       /*
       if data = username / email / phone etc, show error on signup page
       server handles duplicates and returns either, success or an error based on what is duplicated
       */
-      navigation.navigate('Login'); //fix this navigation
+      console.log(returnData);
+      if (returnData == "1") {
+        //show user/email/phone error
+        setDuplicateError("User, email, phone");
+      }else if (returnData == "2") {
+        //show user/email error
+        setDuplicateError("User, email");
+      }else if (returnData == "3") {
+        //show email/phone error
+        setDuplicateError("phone, email");
+      }else if (returnData == "4") {
+        //show user/phone error
+        setDuplicateError("User, phone");
+      }else if (returnData == "5") {
+        //show email error
+        setDuplicateError("email");
+      }else if (returnData == "6") {
+        //show user error
+        setDuplicateError("User");
+      }else if (returnData == "7") {
+        //show phone error
+        setDuplicateError("phone");
+      }else{
+        navigation.navigate('Login'); //fix this navigation
+      }
     })
     .catch(err => {
       console.log(err);

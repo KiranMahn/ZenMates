@@ -103,29 +103,29 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
       isEmail ++;
       isUsername ++;
       isPhone ++;
-      return res.json("email username phone");
+      return res.json("1");
     }else if (result[0].email == email && result[0].username == username) {
       isEmail ++;
       isUsername ++;
-      return res.json("email and username");
+      return res.json("2");
     }else if (result[0].email == email && result[0].phone == phoneNum) {
       isEmail ++;
       isPhone ++;
-      return res.json("email and phone");
+      return res.json("3");
     }else if (result[0].username == username && result[0].phone == phoneNum) {
       isUsername ++;
       isPhone ++;
-      return res.json("username and phone");
+      return res.json("4");
     }else if(result[0].email == email) {
       isEmail ++;
       console.log("email exists")
-      return res.json("email");
+      return res.json("5");
     }else if(result[0].username == username){
       isUsername ++;
-      return res.json("username");
+      return res.json("6");
     }else if(result[0].phone == phoneNum){
       isPhone ++;
-      return res.json("phone");
+      return res.json("7");
     }
   });
   if (isUsername < 1 && isEmail < 1 && isPhone < 1) {
