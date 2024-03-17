@@ -32,17 +32,14 @@ const ChatScreen = ({navigation, route}) => {
         });
 
         if (data.length > 0) {
-          const contact = data[0];
-          console.log(contact);
+          for(i = 0; i < data.length; i++) {
+            const contact = data[i];
+            console.log("contact " + i + ": ");
+            console.log(contact);
+          }
+          
         }
-        const { emaildata } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails],
-        });
         
-        if (emaildata.length > 0) {
-          const contact = emaildata[0];
-          console.log(contact);
-        }
       }
     })();
   }, []);
