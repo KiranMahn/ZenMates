@@ -1,7 +1,8 @@
 import React, {useCallback} from 'react';
 import {Alert, Button, Linking, StyleSheet, View, TextInput, Text, Pressable} from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
+import * as Contacts from 'expo-contacts';
 const supportedURL = 'https://wa.me/447484823438?text=I%27m%20interested%20in%20your%20car%20for%20sale';
 
 const OpenURLButton = ({url, children}) => {
@@ -22,6 +23,30 @@ const OpenURLButton = ({url, children}) => {
 };
 
 const ChatScreen = ({navigation, route}) => {
+  useEffect(() => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails],
+        });
+
+        if (data.length > 0) {
+          const contact = data[0];
+          console.log(contact);
+        }
+        const { emaildata } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails],
+        });
+        
+        if (emaildata.length > 0) {
+          const contact = emaildata[0];
+          console.log(contact);
+        }
+      }
+    })();
+  }, []);
+
   let user = route.params.user;
 
   const [message, setMessage] = useState('');
