@@ -1,7 +1,9 @@
 import React, {useCallback} from 'react';
 import {Alert, Button, Linking, StyleSheet, View, TextInput, Text, Pressable} from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
+import * as Contacts from 'expo-contacts';
+import {contactNumber, contactName} from './ChooseContact';
 const supportedURL = 'https://wa.me/447484823438?text=I%27m%20interested%20in%20your%20car%20for%20sale';
 
 const OpenURLButton = ({url, children}) => {
@@ -22,12 +24,18 @@ const OpenURLButton = ({url, children}) => {
 };
 
 const ChatScreen = ({navigation, route}) => {
-  let user = route.params.user;
+  useEffect(() => {
+    setContact(contactName);
+
+  });
+  
+
 
   const [message, setMessage] = useState('');
   const [selected, setSelected] = useState('');
   const [supportedURL, setSupportedURL] = useState('');
-
+  const [contact, setContact] = useState('Choose a contact');
+  const [chooseContact, setChooseContact] = useState(false);
   const promptPressed = () => {
     
   }
@@ -35,17 +43,26 @@ const ChatScreen = ({navigation, route}) => {
   const useMessage = (mess) => {
     setSelected(mess);
     setMessage(mess);
-    setSupportedURL("https://wa.me/447484823438?text=" + encodeURIComponent(mess));
+    setContact(contactName);
+    console.log("phone number of chosen contact: " + contactNumber);
+    setSupportedURL("https://wa.me/" + contactNumber + "?text=" + encodeURIComponent(mess));
   }
 
 
-  
   return (
     <View style={styles.container}>
-      <Text style={{
-        fontSize: 20, 
-      }}
-      >Sending a message to: Kiran</Text>
+      <View>
+        <Text style={{
+          fontSize: 20, 
+        }}
+        >Sending a message to: </Text>
+        <TouchableOpacity style={{alignSelf: 'center', backgroundColor: 'lightblue', padding: 10, borderRadius: 15, margin: 10}}>
+          <Text
+          onPress={() => navigation.navigate('ChooseContact')}
+          >{contact}</Text>
+        </TouchableOpacity>
+      </View>
+      
       <Text>Choose a prompt: </Text>
       <View>
         <TouchableOpacity
@@ -96,6 +113,7 @@ const ChatScreen = ({navigation, route}) => {
       <OpenURLButton url={supportedURL}>Send in Whatsapp</OpenURLButton>
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({

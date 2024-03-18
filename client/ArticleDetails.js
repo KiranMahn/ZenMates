@@ -58,11 +58,6 @@ const ArticleDetails = ({navigation, route}) => {
         <View>
             {listComponents}
         </View>
-
-
-
-
-
     );
   } else {
     return (

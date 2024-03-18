@@ -21,6 +21,25 @@ async function getGuideData()  {
     return data;
 }
 
+async function getDiscussionPosts()  {
+    //fetch from server site /getguidedata
+    //const [data, setData] = useState([])
+    let data = { articles: []};
+    await fetch('http://localhost:8082/getDiscussionPosts/')
+      .then(result => result.json())
+      .then(jsonData => {
+        data.articles = jsonData;
+        console.log("data in requests for getDiscussionPosts: ")
+        console.log(JSON.stringify(data));
+        return data;
+      })
+      .catch(err => {
+        console.log(err);
+        return data;
+      });
+    return data;
+}
+
 
 const getArticleById = (id) => {
 
@@ -123,4 +142,4 @@ const getArticlesData = () => {
 const Requests = () => {
 }
 
-export {getGuideData, getArticleById};
+export {getGuideData, getArticleById, getDiscussionPosts};
