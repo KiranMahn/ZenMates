@@ -11,6 +11,7 @@ const EntryScreen = ({navigation}) => {
   const [gender, setGender] = useState()
   const [data, setData] = useState()
   const [duplicateError, setDuplicateError] = useState()
+  const [showError, setShowErr] = useState(false);
 
 
   const loadData = async () => {
@@ -51,6 +52,7 @@ const EntryScreen = ({navigation}) => {
       }
     })
     .catch(err => {
+      setShowErr(true);
       console.log(err);
     });
   }
@@ -64,82 +66,101 @@ const EntryScreen = ({navigation}) => {
     }
   }
 
+  const ErrorPage = () => {
+    return (
+      <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center', width: '90%'}}>
+        <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Error</Text>
+        <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>Invalid fields. Please try again</Text>
+      </View>
+    );
+  };
+
+  const SignupPage = () => {
+    return (
+      <View style={{
+        flexDirection: 'col',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        alignSelf: 'flex-start',
+        marginTop: '5%',
+        }}>
+        <TextInput
+          placeholder="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Date of Birth (dd-mm-yyyy)"
+          value={dob}
+          onChangeText={setDOB}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Gender"
+          value={gender}
+          onChangeText={setGender}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Phone #"
+          value={phoneNum}
+          onChangeText={setPhoneNum}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize={"none"}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize={"none"}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize={"none"}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+        <TextInput
+          placeholder="Re-enter password"
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize={"none"}
+          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+        />
+  
+        <Button
+        title="Sign up"
+        onPress={() => {
+          handleSignUp();
+        }}>
+        </Button>
+  
+      </View>
+    );
+
+  };
+
 
   return (
-    <View style={{
-      flexDirection: 'col',
-      justifyContent: 'center',
-      width: '100%',
-      height: '100%',
-      alignSelf: 'flex-start',
-      marginTop: 1,
-      }}>
-      <TextInput
-        placeholder="First Name"
-        value={firstName}
-        onChangeText={setFirstName}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Last Name"
-        value={lastName}
-        onChangeText={setLastName}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Date of Birth (dd-mm-yyyy)"
-        value={dob}
-        onChangeText={setDOB}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Gender"
-        value={gender}
-        onChangeText={setGender}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Phone #"
-        value={phoneNum}
-        onChangeText={setPhoneNum}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize={"none"}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-        autoCapitalize={"none"}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize={"none"}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-      <TextInput
-        placeholder="Re-enter password"
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize={"none"}
-        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
-      />
-
-      <Button
-      title="Sign up"
-      onPress={() => {
-        handleSignUp();
-      }}>
-      </Button>
-
+    <View>
+      {showError && <ErrorPage/>}
+      <SignupPage/>
     </View>
   );
 
