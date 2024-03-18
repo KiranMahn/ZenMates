@@ -13,7 +13,11 @@ const EntryScreen = ({navigation}) => {
       console.log("data in requests: ")
       console.log(JSON.stringify(jsonData));
       setData(jsonData);
-      navigation.navigate('Home', {id: jsonData[0]["profileID"]});
+      if(jsonData == []){
+        //return an error
+      }else {
+        navigation.navigate('Home', {id: jsonData[0]["profileID"]});
+      }
     })
     .catch(err => {
       console.log(err);
@@ -56,10 +60,10 @@ const EntryScreen = ({navigation}) => {
 
       <Button
       title="Login"
-      //onPress={() => handleLogin()}
-      onPress={ () =>{
+      onPress={() => handleLogin()}
+      /*onPress={ () =>{
         navigation.navigate('Home', {id: 0});
-      }}>
+      }}*/>
       </Button>
 
       <Button
