@@ -5,49 +5,49 @@ import { TouchableOpacity } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { SafeAreaView } from 'react-native';
 
-const ChatScreen = ({navigation, route}) => {
+const ChooseContact = ({navigation, route}) => {
   let listComponents = [];
-
+  const [contacts, setContacts] = useState();
   useEffect(() => {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === 'granted') {
-        const { data } = await Contacts.getContactsAsync({
+        let thisdata = await Contacts.getContactsAsync({
           fields: [Contacts.Fields.PhoneNumbers],
         });
-
-        if (data.length > 0) {
-          for(i = 0; i < data.length; i++) {
-            const contact = data[i];
-            console.log("contact " + i + ": ");
-            console.log(contact);
-            listComponents.push(
-                <TouchableOpacity key={contact.id} style={{display:'flex', flex: 1, width: '100%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 10, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}} onPress={() => handleClick(data.articles[i]["id"])}>
-                  <Text style={{margin: 15, fontSize: 30, position: 'absolute', right: 5, flex: 1}}>{contact.firstName}</Text>
-                </TouchableOpacity>
-          );
-          }
-          
-        } else {
-            listComponents.push(
-                <Text>You have no Contacts</Text>
-            );
-        }
-        
+        setContacts(thisdata);
       }
     })();
   }, []);
 
 
-  const [contact, setContact] = useState('');
   const [selected, setSelected] = useState('');
 
-
-  const useContact = (id) => {
+  const handleClick = (id) => {
     setSelected(id);
     setContact(id);
   }
 
+  if (contacts != null) {
+    console.log("you have contacts! of length: " + contacts.data.length)
+    for(i = 0; i < contacts.data.length; i++) { // cant get length of data object
+      const contact = contacts.data[i];
+      console.log("contact " + i + ": ");
+      console.log(contact);
+      listComponents.push(
+          <TouchableOpacity key={contact.id} style={{display:'flex', flex: 1, width: '100%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 10, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}} onPress={() => handleClick(contact.id)}>
+            <Image source={require('./assets/userIcon.png')}></Image>
+            <Text style={{margin: 15, fontSize: 30, marginLeft: 35}}>{contact.firstName}</Text>
+          </TouchableOpacity>
+    );
+    }
+    
+  } else {
+      listComponents.push(
+          <Text key="0">You have no Contacts</Text>
+      );
+  }
+  console.log("list componenets: " + listComponents.toString())
 
   
   return (
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ChatScreen;
+export default ChooseContact;

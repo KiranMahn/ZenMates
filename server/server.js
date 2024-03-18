@@ -35,6 +35,20 @@ app.get("/getguidedata", (req, res) => {
   //return article.ArticleCount;
 });
 
+app.get("/getDiscussionPosts", (req, res) => {
+
+  dbConfig.query("SELECT * FROM discussionBoard", (err, result) => {
+    if (err) throw err;
+    //numArticles = result.length
+    //console.log(result.length);
+    return res.json(result);
+
+  });
+
+  //return article.ArticleCount;
+});
+
+
 app.get("/getarticledata/:id", (req, res) => {
   const artid = req.params.id;
   dbConfig.query(`SELECT * FROM articles WHERE \`articleID\` = \'${artid}\'`, (err, result) => {

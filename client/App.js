@@ -13,7 +13,7 @@ import Signup from './Signup';
 import DiscussionBoard from './DiscussionBoard';
 import ChooseContact from './ChooseContact';
 const Stack = createNativeStackNavigator();
-
+import { useState } from "react";
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
