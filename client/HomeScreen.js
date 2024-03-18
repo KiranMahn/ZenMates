@@ -63,6 +63,20 @@ const HomeScreen = ({navigation, route}) => {
                         <Image source={require('./assets/blog.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Discussion Board</Text>
                     </Pressable>
+                             {/* weather button */}
+                    <Pressable
+                        style={styles.pageButton}
+                        title="Weather"
+                        onPress={() => {
+                            navigation.navigate("Weather", { user: user });
+                        }}
+                    >
+                        <Image
+                            source={require("./assets/cloud.png")}
+                            style={{ alignSelf: "center", margin: 10, width: 50, height: 50 }}
+                        />
+                        <Text style={{ textAlign: "center" }}>Weather</Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
