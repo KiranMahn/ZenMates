@@ -28,6 +28,16 @@ const ProfileScreen = ({navigation, route}) => {
         console.log(JSON.stringify(jsonData));
         setData(jsonData);
         //set user stats
+        setUsername(jsonData[0]["username"]);
+        setName(jsonData[0]["firstName"] + jsonData[0]["lastName"]);
+        setDOB(jsonData[0]["dob"]);
+        setEmail(jsonData[0]["email"]);
+        setPhoneNum(jsonData[0]["phone"]);
+        setGender(jsonData[0]["gender"]);
+        setGender(jsonData[0]["streak"]);
+        setGender(jsonData[0]["medals"]);
+        setGender(jsonData[0]["points"]);
+        setGender(jsonData[0]["friends"]);
       })
       .catch(err => {
         console.log(err);
@@ -42,17 +52,8 @@ const ProfileScreen = ({navigation, route}) => {
       console.log(err);
     }
 
-    setUsername(data[0]["username"]);
-    setName(data[0]["firstName"] + jsonData[0]["lastName"]);
-    setDOB(data[0]["dob"]);
-    setEmail(data[0]["email"]);
-    setPhoneNum(data[0]["phone"]);
-    setGender(data[0]["gender"]);
-    setGender(data[0]["streak"]);
-    setGender(data[0]["medals"]);
-    setGender(data[0]["points"]);
-    setGender(data[0]["friends"]);
-    
+
+
     const editFields = () => {
       setEditMode(!editMode);
       if(!editMode) {
