@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Text, View, Image, Pressable, TextInput } from "react-native";
 import { ScrollView } from "react-native";
 
@@ -20,39 +20,33 @@ const ProfileScreen = ({navigation, route}) => {
     const [data, setData] = useState();
     //need user stats
 
-    const loadData = async () => {
-      await fetch(`http://localhost:8082/getprofile/${userID}/`)
-      .then(result => result.json())
-      .then(jsonData => {
-        console.log("data in requests: ")
-        console.log(JSON.stringify(jsonData));
-        setData(jsonData);
-        //set user stats
-        setUsername(jsonData[0]["username"]);
-        setName(jsonData[0]["firstName"] + jsonData[0]["lastName"]);
-        setDOB(jsonData[0]["dob"]);
-        setEmail(jsonData[0]["email"]);
-        setPhoneNum(jsonData[0]["phone"]);
-        setGender(jsonData[0]["gender"]);
-        setGender(jsonData[0]["streak"]);
-        setGender(jsonData[0]["medals"]);
-        setGender(jsonData[0]["points"]);
-        setGender(jsonData[0]["friends"]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    }
-
-    console.log(data);
-    try {
+    useEffect(() => {
+      const loadData = async () => {
+        console.log("fetching");
+        await fetch(`http://localhost:8082/getprofile/${userID}/`)
+        .then(result => result.json())
+        .then(jsonData => {
+          console.log("data in requests: ")
+          console.log(JSON.stringify(jsonData));
+          setData(jsonData);
+          //set user stats
+          setUsername(jsonData[0]["username"]);
+          setName(jsonData[0]["firstName"] + jsonData[0]["lastName"]);
+          setDOB(jsonData[0]["dob"]);
+          setEmail(jsonData[0]["email"]);
+          setPhoneNum(jsonData[0]["phone"]);
+          setGender(jsonData[0]["gender"]);
+          setStreak(jsonData[0]["streak"]);
+          setMedals(jsonData[0]["medals"]);
+          setPoints(jsonData[0]["points"]);
+          setFriends(jsonData[0]["friends"]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }
       loadData();
-      //console.log(data);
-    } catch (e) {
-      console.log(err);
-    }
-
-
+    }, []);
 
     const editFields = () => {
       setEditMode(!editMode);
@@ -88,19 +82,19 @@ const ProfileScreen = ({navigation, route}) => {
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Streak: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>6 days</TextInput>
+            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{streak}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Medals: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>0</TextInput>
+            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{medals}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Friends: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>0</TextInput>
+            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{friends}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Points: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>0</TextInput>
+            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{points}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>DOB: </Text>
