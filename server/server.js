@@ -188,6 +188,26 @@ function insertFriends(uID, friendID) {
   });
 }
 
+function checkFriends(uID, friendID) {
+  console.log("adding friend");
+  dbConfig.query(`SELECT * FROM friends WHERE (\`initiatedUser\` = \'${uID}\' AND \`requestedUser\` = \'${friendID}\') OR (\`initiatedUser\` = \'${friendID}\' AND \`requestedUser\` = \'${uID}\')`, (err, result) => {
+    if (err) throw err;
+    if (result == []) {
+      return 0;
+    }else {
+      return 1;
+    }
+  });
+}
+
+function increaseFriends(uID) {
+  console.log("adding friend");
+  dbConfig.query(`INSERT INTO friends (\`initiatedUser\`, \`requestedUser\`) VALUES (\'${uID}\',\'${friendID}\')`, (err, result) => {
+    if (err) throw err;
+    return 1;
+  });
+}
+
 app.get("/makefriends/:id/:friend", (req, res) => {
   const uID = req.params.id;
   const friendUname = req.params.friend;
