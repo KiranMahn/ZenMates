@@ -4,11 +4,11 @@ export const Friends = () => {
     let listComponents = [];
     const [contacts, setContacts] = useState();
     const [data, setData] = useState();
-    const [showMyFriends, setShowMyFriends] = useState(false);
-    const [showAddFriends, setShowAddFriends] = useState(true);
+    const [showMyFriends, setShowMyFriends] = useState(true);
+    const [showAddFriends, setShowAddFriends] = useState(false);
     const [addFriendsUsername, setAddFriendUsername] = useState();
-    const [selected, setSelected] = useState();
-
+    const [selected, setSelected] = useState("myFriends");
+    
     useEffect(() => {
         const loadData = async () => {
           let thisdata = { articles: []};
