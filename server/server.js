@@ -170,3 +170,13 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
   }*/
 
 });
+
+
+app.get("/getfriends/:id", (req, res) => {
+  const uID = req.params.id;
+  dbConfig.query(`SELECT \`firstName\`,\`lastName\` FROM profiles INNER JOIN friends ON profiles.profileID = friends.initiatedUser OR profiles.profileID = friends.requestedUser WHERE (friends.initiatedUser = ${uID} OR friends.requestedUser = ${uID}) AND profiles.profileID != ${uID};`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
+});
