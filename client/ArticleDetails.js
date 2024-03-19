@@ -1,5 +1,6 @@
 import { Text, View, Image } from "react-native";
 import { useState, useEffect } from "react";
+import { ScrollView } from "react-native";
 /* Contains a list of mindfulness mini articles */
 
 const ArticleDetails = ({navigation, route}) => {
@@ -55,13 +56,14 @@ const ArticleDetails = ({navigation, route}) => {
     )
 
     return (
-        <View>
-            {listComponents}
-        </View>
+        <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', paddingBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
+          {listComponents}
+        </ScrollView>
     );
   } else {
     return (
       <View>
+        
         <Text>Loading...</Text>
       </View>
     )

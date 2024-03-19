@@ -46,8 +46,8 @@ const GuideScreen = ({navigation, route}) => {
                 <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
               </View>
               <View style={{flexDirection: 'col', height: '100%', flex: 1}}>
-                <Text style={{fontSize: 20, margin: 10, fontWeight: 'bold', flex: 1}}>{data.articles[i]["title"]}</Text>
-                <Text style={{fontSize: 15, margin: 5, flex: 1, flexWrap: 'wrap', width: '80%'}}>{data.articles[i]["description"]}</Text>
+                <Text style={{fontSize: 20, margin: 10, fontWeight: 'bold', height: '20%'}}>{data.articles[i]["title"]}</Text>
+                <Text style={{fontSize: 15, margin: 5, flexWrap: 'wrap', width: '80%'}}>{data.articles[i]["description"]}</Text>
               </View>
               <Text style={{margin: 15, fontSize: 30, position: 'absolute', right: 5, flex: 1}}>&rarr;</Text>
             </TouchableOpacity>
