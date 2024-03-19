@@ -97,7 +97,7 @@ export const Friends = ({navigation, route}) => {
     };
 
     return (
-        <View style={{height: '100%'}}>
+        <View style={{height: '100%', backgroundColor: 'white'}}>
             <View style={{padding: 20, flexDirection: 'row'}}>
                 <Pressable
                     style={{
