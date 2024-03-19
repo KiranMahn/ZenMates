@@ -2,6 +2,45 @@ import { Pressable, View, Text, ScrollView, TextInput } from "react-native";
 import { useState, useEffect } from "react";
 import randomColor from "randomcolor";
 
+const MyFriends = ({listComponents}) => {
+    return (
+        <ScrollView id="ArticleBtnContainer" style={{height: 'auto', width: '100%', marginBottom: 10, padding: 20, backgroundColor: 'white', flexDirection: 'col'}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexDirection: 'row', flexWrap: 'wrap'}}>
+            {listComponents}
+        </ScrollView>
+    );
+
+};
+
+const AddFriend = ({addFriendsUsername, setAddFriendUsername}) => {
+    return (
+        <View style={{width: '100%', height: '50%', flexDirection: 'col', alignItems: 'center', justifyContent: 'space-evenly', padding: 20}}>
+            <Text>Enter your friends username</Text>
+            <TextInput
+                placeholder="Username"
+                value={addFriendsUsername}
+                onChangeText={setAddFriendUsername}
+                style={{backgroundColor: 'whitesmoke', padding: 10, borderRadius: 15, margin: 10, width: '80%', alignSelf: 'center', fontSize: 20}}
+            />
+            <Pressable
+                style={{
+                    justifyContent: 'center',
+                    borderRadius: 15,
+                    backgroundColor: 'rgba(78, 165, 65, 1)',
+                    marginHorizontal: '1%',
+                    width: "30%",
+                    height: 45,
+                }}
+                onPress={() => {
+                    navigation.navigate('Friends', {userID: userID})
+                }}>
+                <Text style={{
+                    textAlign: 'center'
+                    }}>Add</Text>
+            </Pressable>
+        </View>
+    );
+};
+
 export const Friends = ({navigation, route}) => {
     const [userID, setUserid] = useState(route.params.userID);
     let listComponents = [];
@@ -57,45 +96,6 @@ export const Friends = ({navigation, route}) => {
 
     console.log("list componenets: " + listComponents.toString())
 
-    const MyFriends = () => {
-        return (
-            <ScrollView id="ArticleBtnContainer" style={{height: 'auto', width: '100%', marginBottom: 10, padding: 20, backgroundColor: 'white', flexDirection: 'col'}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexDirection: 'row', flexWrap: 'wrap'}}>
-                {listComponents}
-            </ScrollView>
-        );
-
-    };
-
-    const AddFriend = () => {
-        return (
-            <View style={{width: '100%', height: '50%', flexDirection: 'col', alignItems: 'center', justifyContent: 'space-evenly', padding: 20}}>
-                <Text>Enter your friends username</Text>
-                <TextInput
-                    placeholder="Username"
-                    value={addFriendsUsername}
-                    onChangeText={setAddFriendUsername}
-                    style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '80%', alignSelf: 'center', fontSize: 20}}
-                />
-                <Pressable
-                    style={{
-                        justifyContent: 'center',
-                        borderRadius: 15,
-                        backgroundColor: 'rgba(78, 165, 65, 1)',
-                        marginHorizontal: '1%',
-                        width: "30%",
-                        height: 45,
-                    }}
-                    onPress={() => {
-                        navigation.navigate('Friends', {userID: userID})
-                    }}>
-                    <Text style={{
-                        textAlign: 'center'
-                        }}>Add</Text>
-                </Pressable>
-            </View>
-        );
-    };
-
     return (
         <View style={{height: '100%', backgroundColor: 'white'}}>
             <View style={{padding: 20, flexDirection: 'row'}}>
@@ -139,8 +139,8 @@ export const Friends = ({navigation, route}) => {
                         }}>My Friends</Text>
                 </Pressable>
             </View>
-           {showMyFriends && <MyFriends/>}
-           {showAddFriends && <AddFriend/>}
+           {showMyFriends && <MyFriends listComponents={listComponents}/>}
+           {showAddFriends && <AddFriend addFriendsUsername={addFriendsUsername} setAddFriendUsername={setAddFriendUsername}/> }
         </View>
 
     );
