@@ -142,7 +142,5 @@ export const Friends = ({navigation, route}) => {
            {showMyFriends && <MyFriends listComponents={listComponents}/>}
            {showAddFriends && <AddFriend addFriendsUsername={addFriendsUsername} setAddFriendUsername={setAddFriendUsername}/> }
         </View>
-
     );
-
 }
