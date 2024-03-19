@@ -1,5 +1,3 @@
-//use expo's location
-
 import { Alert } from "react-native";
 import * as Location from "expo-location";
 
@@ -35,8 +33,6 @@ const AltitudeService = {
       return null;
     }
   },
-
-  // Function to process altitude data and determine when to send push notifications
   processAltitudeData: async () => {
     try {
       // Fetch altitude data
@@ -46,9 +42,8 @@ const AltitudeService = {
         return false;
       }
 
-      // Implement logic to determine when to send altitude-related push notifications
-      // For example, compare the current altitude with predefined thresholds
-      const threshold = 1000; // Example threshold in meters
+      // Check if altitude exceeds 200 meters
+      const threshold = 200; // Example threshold in meters
       if (altitude > threshold) {
         // Altitude exceeds threshold, send notification
         return true;
@@ -62,6 +57,8 @@ const AltitudeService = {
       return false;
     }
   },
+
+  // Function to process altitude data and determine when to send push notifications
 };
 
 export default AltitudeService;
