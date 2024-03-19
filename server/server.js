@@ -190,6 +190,32 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
 
 });
 
+function updateProfile(uID, firstName, lastName, gender, phone) {
+  dbConfig.query(`UPDATE profiles SET \`firstName\` = \'${firstName}\', \`lastName\` = \'${lastName}\', \`gender\` = \'${gender}\', \`phone\` = \'${phone}\' WHERE profiles.profileID = ${uID}`, (err, result) => {
+    if (err) throw err;
+    return 1;
+  });
+}
+
+app.get("/updateuser/:id/:fname/:lname/:gen/:phn", (req, res) => {
+  const uID = req.params.id;
+  const firstName = req.params.fname;
+  const lastName = req.params.lname;
+  const gender = req.params.gen;
+  const phoneNum = req.params.phn;
+  let isPhone = 0;
+  dbConfig.query(`SELECT * FROM profiles WHERE \`phone\` = \'${phoneNum}\' AND \`profileID\` != \'${uID}\'`, (err, result) => {
+    if (err) throw err;
+    if (result.length < 1) {
+      updateProfile(uID,firstName,lastName,gender,phoneNum);
+      return res.json("Success!");
+    }
+    if(result[0].phone == phoneNum){
+      return res.json("phone");
+    }
+  });
+});
+
 
 app.get("/getfriends/:id", (req, res) => {
   const uID = req.params.id;

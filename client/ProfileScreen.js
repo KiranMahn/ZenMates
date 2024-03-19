@@ -18,6 +18,8 @@ const ProfileScreen = ({navigation, route}) => {
     const [friends, setFriends] = useState()
     const [points, setPoints] = useState()
     const [data, setData] = useState();
+    const [showError, setShowErr] = useState(false);
+    const [error, setError] = useState("Invalid fields. Please try again");
     //need user stats
 
     useEffect(() => {
@@ -48,6 +50,29 @@ const ProfileScreen = ({navigation, route}) => {
       loadData();
     }, []);
 
+
+    const postData = async () => {
+      const splitName = name.split(" ");
+      console.log(splitName[0]);
+      console.log(splitName[1]);
+      await fetch(`http://localhost:8082/updateuser/${userID}/${splitName[0]}/${splitName[1]}/${gender}/${phoneNum}/`)
+      .then(result => result.json())
+      .then(jsonData => {
+        console.log("data in requests: ");
+        console.log(JSON.stringify(jsonData));
+        //set user stats
+        if (jsonData == "phone") {
+          setError("username, email, phone number");
+          setShowErr(true);
+        }
+        console.log("success");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+
+
     const editFields = () => {
       setEditMode(!editMode);
       if(!editMode) {
@@ -56,8 +81,23 @@ const ProfileScreen = ({navigation, route}) => {
       } else {
         setEditColor('white')
         setEditIcon(require('./assets/pen.png'))
+        postData();
       }
     }
+
+    const handleChange = () => {
+      try {
+        postData();
+        //console.log(data);
+      } catch (e) {
+        console.log(err);
+        console.log(e);
+
+      }
+    }
+
+
+    console.log(name);
 
     return (
       <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
@@ -70,15 +110,19 @@ const ProfileScreen = ({navigation, route}) => {
         <ScrollView style={{width: '100%', height: '65%', marginTop: 30}}>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Name: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={editMode} backgroundColor={editColor}>{name}</TextInput>
+            <TextInput onChangeText={setName} style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={editMode} backgroundColor={editColor}>{name}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
-            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>DoB: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={editMode} backgroundColor={editColor}>{dob}</TextInput>
+            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Gender: </Text>
+            <TextInput onChangeText={setGender} style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={editMode} backgroundColor={editColor}>{gender}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Phone #: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={editMode} backgroundColor={editColor}>{phoneNum}</TextInput>
+            <TextInput onChangeText={setPhoneNum} style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={editMode} backgroundColor={editColor}>{phoneNum}</TextInput>
+          </View>
+          <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
+            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>DoB: </Text>
+            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{dob}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Streak: </Text>
