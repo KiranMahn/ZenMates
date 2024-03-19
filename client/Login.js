@@ -10,7 +10,7 @@ const ErrorPage = ({error}) => {
   );
 };
 
-const handleLogin = ({err}) => {
+const handleLogin = ({loadData}) => {
   try {
     loadData();
     //console.log(data);
@@ -70,6 +70,7 @@ const EntryScreen = ({navigation}) => {
   const [data, setData] = useState();
   const [showError, setShowErr] = useState(false);
   const [error, setError] = useState("Incorrect username or password. Please try again");
+
   const loadData = async () => {
     await fetch(`http://localhost:8082/loginform/${username}/${password}`)
     .then(result => result.json())
@@ -96,7 +97,7 @@ const EntryScreen = ({navigation}) => {
   return (
     <View>
       {showError && <ErrorPage error={error}/>}
-      <LoginPage username={username} setUsername={setUsername} password={password} setPassword={setPassword} navigation={navigation} err={error}/>
+      <LoginPage username={username} setUsername={setUsername} password={password} setPassword={setPassword} navigation={navigation} loadData={loadData}/>
     </View>
 
   );
