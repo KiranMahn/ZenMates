@@ -60,7 +60,7 @@ app.get("/getarticledata/:id", (req, res) => {
 
 app.get("/getprofile/:id", (req, res) => {
   const uname = req.params.id;
-  dbConfig.query(`SELECT * FROM profiles WHERE \`username\` = \'${uname}\'`, (err, result) => {
+  dbConfig.query(`SELECT \`username\`, \`firstName\`, \`lastName\`, \`dob\`, \`email\`, \`phone\`, \`gender\`, \`friends\`, \`medals\`, \`points\`, \`streak\` FROM profiles INNER JOIN userStats ON profiles.profileID = userStats.userID WHERE \`profileID\` = ${uname}`, (err, result) => {
     if (err) throw err;
     return res.json(result);
 
