@@ -14,7 +14,6 @@ const CreatePost = ({navigation, route}) => {
         .then(result => result.json())
         .then(jsonData => {
           console.log("Post created.")
-          navigation.navigate('DiscussionBoard', {userID: userID}); //fix this navigation
         })
         .catch(err => {
           console.log(err);
@@ -24,10 +23,37 @@ const CreatePost = ({navigation, route}) => {
       }
 
     }
+    const checkAwardMedal = async () => {
+      let award = false;
+      await fetch(`http://localhost:8082/getstats/${userID}`)
+      .then(result => result.json())
+      .then(jsonData => {
+        console.log(jsonData)
+        if (jsonData[0].posts % 3 == 0) {
+          award = true;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      if (award) {
+        await fetch(`http://localhost:8082/awardmedal/${userID}/`)
+        .then(result => result.json())
+        .then(jsonData => {
+          console.log("medal awarded");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }
+      navigation.navigate('DiscussionBoard', {userID: userID});
+    }
 
     const handlePost = () => {
       try {
         loadData();
+        checkAwardMedal();
         //console.log(data);
       } catch (e) {
         console.log(err);
