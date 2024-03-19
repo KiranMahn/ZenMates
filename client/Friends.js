@@ -7,6 +7,7 @@ export const Friends = () => {
     const [showMyFriends, setShowMyFriends] = useState(false);
     const [showAddFriends, setShowAddFriends] = useState(true);
     const [addFriendsUsername, setAddFriendUsername] = useState();
+    const [selected, setSelected] = useState();
 
     useEffect(() => {
         const loadData = async () => {
@@ -28,7 +29,6 @@ export const Friends = () => {
       }, []);
   
   
-    const [selected, setSelected] = useState('');
   
     const handleClick = (contact) => {
       setSelected(contact.id);
@@ -98,7 +98,7 @@ export const Friends = () => {
                     style={{
                         justifyContent: 'center',
                         borderRadius: 15,
-                        backgroundColor: 'rgba(202, 227,248, 0.5)',
+                        backgroundColor: (selected == "addFriends") ? "dodgerblue" : "aliceblue",
                         marginHorizontal: '1%',
                         width: "45%",
                         height: 45,
@@ -107,6 +107,7 @@ export const Friends = () => {
                     onPress={() => {
                         setShowAddFriends(true);
                         setShowMyFriends(false);
+                        setSelected("addFriends");
                     }}>
                     <Text style={{                                
                         textAlign: 'center'
@@ -116,15 +117,17 @@ export const Friends = () => {
                     style={{
                         justifyContent: 'center',
                         borderRadius: 15,
-                        backgroundColor: 'rgba(202, 227,248, 0.5)',
+                        backgroundColor: (selected == "myFriends") ? "dodgerblue" : "aliceblue",
                         marginHorizontal: '1%',
                         width: "45%",
                         height: 45,
                         alignSelf: 'flex-start',
+           
                     }}
                     onPress={() => {
                         setShowAddFriends(false);
                         setShowMyFriends(true);
+                        setSelected("myFriends");
                     }}>
                     <Text style={{                                
                         textAlign: 'center'
