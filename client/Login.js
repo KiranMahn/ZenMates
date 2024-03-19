@@ -7,6 +7,7 @@ const EntryScreen = ({navigation}) => {
   const [data, setData] = useState();
   const [showError, setShowErr] = useState(false);
   const [error, setError] = useState("Incorrect username or password. Please try again");
+
   const loadData = async () => {
     await fetch(`http://localhost:8082/loginform/${username}/${password}`)
     .then(result => result.json())
@@ -32,67 +33,47 @@ const EntryScreen = ({navigation}) => {
       console.log(err);
     }
   }
-  console.log(username);
-  const ErrorPage = () => {
-    return (
-      <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center'}}>
-        <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Error</Text>
-        <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>{error}</Text>
-      </View>
-    );
-  };
 
-  const LoginPage = () => {
-    return (
-      <View style={{
-        flexDirection: 'col',
-        width: '100%',
-        justifyContent: 'center',
-        height: '100%',
-        alignSelf: 'flex-start',
-        marginTop: 1,
-        }}>
-        <TextInput
-          placeholder="Username"
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize={"none"}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '70%', height: '8%', alignSelf: 'center', fontSize: 20}}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          autoCapitalize={"none"}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '70%', height: '8%', alignSelf: 'center', fontSize: 20, marginBottom:  20}}
-        />
-
-        <Button
-        title="Login"
-        //onPress={() => handleLogin()}
-        onPress={ () =>{
-          navigation.navigate('Home', {id: 1});
-        }}>
-        </Button>
-
-        <Button
-        title="Don't have an account? Signup here"
-        onPress={() => {
-          navigation.navigate('Signup')
-        }}
-        >
-        </Button>
-      </View>
-    );
-
-  };
 
   return (
-    <View>
-      {showError && <ErrorPage/>}
-      <LoginPage/>
-    </View>
+    <View style={{
+      flexDirection: 'col',
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      alignSelf: 'flex-start',
+      marginTop: 1,
+      }}>
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize={"none"}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+      />
 
+      <Button
+      title="Login"
+      onPress={() => handleLogin()}
+      /*onPress={ () =>{
+        navigation.navigate('Home', {id: 0});
+      }}*/>
+      </Button>
+
+      <Button
+      title="Don't have an account? Signup here"
+      onPress={() => {
+        navigation.navigate('Signup')
+      }}
+      >
+      </Button>
+    </View>
   );
 
 }
