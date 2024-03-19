@@ -10,7 +10,7 @@ const ErrorPage = ({error}) => {
   );
 };
 
-const LoginPage = ({username, setUsername, password, setPassword}) => {
+const LoginPage = ({username, setUsername, password, setPassword, navigation}) => {
   return (
     <View style={{
       flexDirection: 'col',
@@ -93,7 +93,7 @@ const EntryScreen = ({navigation}) => {
   return (
     <View>
       {showError && <ErrorPage error={error}/>}
-      <LoginPage username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>
+      <LoginPage username={username} setUsername={setUsername} password={password} setPassword={setPassword} navigation={navigation}/>
     </View>
 
   );
