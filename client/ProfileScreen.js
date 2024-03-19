@@ -96,10 +96,6 @@ const ProfileScreen = ({navigation, route}) => {
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Points: </Text>
             <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{points}</TextInput>
           </View>
-          <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
-            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>DOB: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>00/00/0000</TextInput>
-          </View>
         </ScrollView>
 
         <View style={{width: '100%', height: '10%', display: 'flex', alignItems: 'flex-end'}}>
