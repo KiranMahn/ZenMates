@@ -23,7 +23,6 @@ app.listen(8082, () => {
 });
 
 app.get("/getguidedata", (req, res) => {
-
   dbConfig.query("SELECT * FROM articles", (err, result) => {
     if (err) throw err;
     //numArticles = result.length
@@ -31,21 +30,29 @@ app.get("/getguidedata", (req, res) => {
     return res.json(result);
 
   });
-
-  //return article.ArticleCount;
 });
 
 app.get("/getDiscussionPosts", (req, res) => {
-
-  dbConfig.query("SELECT * FROM discussionBoard", (err, result) => {
+  dbConfig.query("SELECT profiles.firstName, discussionBoard.title, discussionBoard.body FROM discussionBoard INNER JOIN profiles WHERE discussionBoard.authorID = profiles.profileID;", (err, result) => {
     if (err) throw err;
     //numArticles = result.length
     //console.log(result.length);
     return res.json(result);
 
   });
+});
 
-  //return article.ArticleCount;
+app.get("/makeDiscussionPost/:id/:title/:body", (req, res) => {
+  const authID = req.params.id;
+  const title = req.params.title;
+  const body = req.params.body;
+  dbConfig.query(`INSERT INTO discussionBoard (\`authorID\`, \`title\`, \`body\`) VALUES (\'${authID}\', \'${title}\', \'${body}\')`, (err, result) => {
+    if (err) throw err;
+    //numArticles = result.length
+    //console.log(result.length);
+    return res.json(result);
+
+  });
 });
 
 

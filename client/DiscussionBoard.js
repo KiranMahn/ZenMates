@@ -6,6 +6,7 @@ import { Component, useState, useEffect } from "react";
 
 
 const DiscussionBoard = ({navigation, route}) => {
+  const [userID, setUserid] = useState(route.params.userID);
   const [data, setData] = useState();
   // get data for all articles
   useEffect(() => {
@@ -39,29 +40,29 @@ const DiscussionBoard = ({navigation, route}) => {
       listComponents.push(
             <View key={i} style={{alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 15, padding: 20, margin: 10, width: '100%'}}>
               <Text style={{marginBottom: 10, fontWeight: 700, fontSize:18}}>{data.articles[i].title}</Text>
-              <Text style={{margin: 5, alignSelf: 'flex-start'}}>Post by: {data.articles[i].author}</Text>
+              <Text style={{margin: 5, alignSelf: 'flex-start'}}>Post by: {data.articles[i].firstName }</Text>
               <Text style={{margin: 5}}>{data.articles[i].body}</Text>
             </View>
       );
     }
   }
-  
-  
+
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{width: '100%', height: '100%', backgroundColor: 'white',}}>
         <Text style={{alignSelf: 'center', margin: '5%', fontSize:30, fontWeight:'bold'}}>Discussion Board</Text>
         <View style={{display: 'flex', flexDirection: 'row', height: '8%', alignItems: 'center', justifyContent: 'center', backgroundColor: 'aliceblue', width: '50%', alignSelf: 'center', borderRadius: 20, padding: 5}}>
           <Image source={require('./assets/add.png')}/>
-          <Button title="create a post" onPress={() => navigation.navigate('CreatePost')}/>
+          <Button title="create a post" onPress={() => navigation.navigate('CreatePost', {userID: userID})}/>
         </View>
         <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', padding: 10, marginBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
           {listComponents}
         </ScrollView>
       </View>
     </SafeAreaView>
-    
-    
+
+
   );
 };
 
