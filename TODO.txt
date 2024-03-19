@@ -4,7 +4,6 @@ mindfullnes app:
 - notifications tab with history of notifications saved in local 
 - use brightness sensor --> if in dark room and sunny outside push notif --> go outside
 
-- mindfullness docs (maybe meditation)  FRONTEND DONE
-- whatsapp sdk to communicate           FRONTEND DONE
+- mindfullness docs (maybe meditation)  DONE
+- whatsapp sdk to communicate           DONE
 - daily forum discussion board          FRONTEND DONE
-

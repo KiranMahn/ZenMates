@@ -12,7 +12,7 @@ const EntryScreen = ({navigation}) => {
   const [data, setData] = useState()
   const [duplicateError, setDuplicateError] = useState("no data entered")
   const [showError, setShowErr] = useState(false);
-
+  const [error, setError] = useState("Invalid fields. Please try again");
 
   const loadData = async () => {
     if (firstName != undefined && lastName != undefined && dob != undefined && gender != undefined && email != undefined && password != undefined && phoneNum != undefined) {
