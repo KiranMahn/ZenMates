@@ -15,7 +15,7 @@ const handleLogin = ({loadData}) => {
     loadData();
     //console.log(data);
   } catch (e) {
-    console.log(err);
+    console.log(e);
   }
 }
 
