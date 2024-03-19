@@ -60,10 +60,10 @@ const EntryScreen = ({navigation}) => {
 
       <Button
       title="Login"
-      onPress={() => handleLogin()}
-      /*onPress={ () =>{
-        navigation.navigate('Home', {id: 0});
-      }}*/>
+      //onPress={() => handleLogin()}
+      onPress={ () =>{
+        navigation.navigate('Home', {id: 1});
+      }}>
       </Button>
 
       <Button
