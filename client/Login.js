@@ -22,10 +22,9 @@ const EntryScreen = ({navigation}) => {
     .then(jsonData => {
       console.log("data in requests: ")
       console.log(JSON.stringify(jsonData));
-      setData(jsonData);
       setShowErr(false);
-      if (jsonData.length > 1) {
-        navigation.navigate('Home', {id: jsonData[0]["profileID"]});
+      if (jsonData.length == 1) {
+        navigation.navigate('Home', {id: jsonData[0].profileID});
       }else {
         setShowErr(true);
       }
