@@ -14,6 +14,7 @@ import DiscussionBoard from './DiscussionBoard';
 import ChooseContact from './ChooseContact';
 const Stack = createNativeStackNavigator();
 import { useState } from "react";
+import { Friends } from "./Friends";
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
@@ -69,6 +70,11 @@ export default function App() {
               <Stack.Screen 
                 name="ChooseContact" 
                 component={ChooseContact} 
+              />
+              {/* Friends */}
+              <Stack.Screen 
+                name="Friends" 
+                component={Friends} 
               />
 
         </Stack.Navigator>
