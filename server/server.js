@@ -181,18 +181,18 @@ app.get("/getfriends/:id", (req, res) => {
 });
 
 function insertFriends(uID, friendID) {
-  console.log("adding friend");
   dbConfig.query(`INSERT INTO friends (\`initiatedUser\`, \`requestedUser\`) VALUES (\'${uID}\',\'${friendID}\')`, (err, result) => {
     if (err) throw err;
+    increaseFriends(uID);
     return 1;
   });
 }
 
 function checkFriends(uID, friendID) {
-  console.log("adding friend");
   dbConfig.query(`SELECT * FROM friends WHERE (\`initiatedUser\` = \'${uID}\' AND \`requestedUser\` = \'${friendID}\') OR (\`initiatedUser\` = \'${friendID}\' AND \`requestedUser\` = \'${uID}\')`, (err, result) => {
     if (err) throw err;
-    if (result == []) {
+    if (result.length < 1) {
+      insertFriends(uID, friendID);
       return 0;
     }else {
       return 1;
@@ -201,8 +201,7 @@ function checkFriends(uID, friendID) {
 }
 
 function increaseFriends(uID) {
-  console.log("adding friend");
-  dbConfig.query(`INSERT INTO friends (\`initiatedUser\`, \`requestedUser\`) VALUES (\'${uID}\',\'${friendID}\')`, (err, result) => {
+  dbConfig.query(`UPDATE userStats SET friends = friends + 1 WHERE userStats.userID = ${uID}`, (err, result) => {
     if (err) throw err;
     return 1;
   });
@@ -215,11 +214,21 @@ app.get("/makefriends/:id/:friend", (req, res) => {
   let friendExists = false;
   dbConfig.query(`SELECT \`profileID\` FROM profiles WHERE \`username\` = \'${friendUname}\'`, (err, result) => {
     if (err) throw err;
-    friendExists = true;
-    friendID = result[0].profileID;
-    if (friendExists) {
-      insertFriends(uID, friendID)
+    if (result.length > 0) {
+      friendID = result[0].profileID;
+      friendExists = true;
     }
-    return res.json("friends added");
+    if (friendExists) {
+        console.log("adding");
+        const check = checkFriends(uID, friendID);
+        if (check == 0) {
+          return res.json("friend added");
+        }else {
+          return res.json("friends already added");
+        }
+    }else{
+      return res.json("user does not exist");
+    }
+
   });
 });
