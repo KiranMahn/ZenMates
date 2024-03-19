@@ -6,6 +6,7 @@ const EntryScreen = ({navigation}) => {
   const [password, setPassword] = useState();
   const [data, setData] = useState();
   const [showError, setShowErr] = useState(false);
+  const [error, setError] = useState("Incorrect username or password. Please try again");
   const loadData = async () => {
     await fetch(`http://localhost:8082/loginform/${username}/${password}`)
     .then(result => result.json())
@@ -17,6 +18,7 @@ const EntryScreen = ({navigation}) => {
     })
     .catch(err => {
       setShowErr(true);
+      setError(err);
       console.log(err);
     });
   }
@@ -34,7 +36,7 @@ const EntryScreen = ({navigation}) => {
     return (
       <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center'}}>
         <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Error</Text>
-        <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>Incorrect username or password. Please try again</Text>
+        <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>{error}</Text>
       </View>
     );
   };

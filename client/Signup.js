@@ -12,7 +12,7 @@ const EntryScreen = ({navigation}) => {
   const [data, setData] = useState()
   const [duplicateError, setDuplicateError] = useState()
   const [showError, setShowErr] = useState(false);
-
+  const [error, setError] = useState("Invalid fields. Please try again");
 
   const loadData = async () => {
     await fetch(`http://localhost:8082/signup/${firstName}/${lastName}/${dob}/${gender}/${username}/${email}/${password}/${phoneNum}/`)
@@ -70,7 +70,7 @@ const EntryScreen = ({navigation}) => {
     return (
       <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center', width: '90%'}}>
         <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Error</Text>
-        <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>Invalid fields. Please try again</Text>
+        <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>{error}</Text>
       </View>
     );
   };
