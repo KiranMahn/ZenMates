@@ -113,6 +113,13 @@ function insertProfile(firstName, lastName, dob, gender, username, email, passwo
   });
 }
 
+function insertStats() {
+  dbConfig.query(`INSERT INTO \`userStats\` (\`userID\`, \`streak\`, \`medals\`, \`friends\`, \`points\`, \`posts\`) VALUES (NULL, \'0\', \'0\', \'0\', \'0\', \'0\')`, (err, result) => {
+    if (err) throw err;
+    return 1;
+  });
+}
+
 app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => {
   const firstName = req.params.fname;
   const lastName = req.params.lname;
@@ -130,6 +137,7 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
     if (result.length < 1) {
       console.log("adding user");
       insertProfile(firstName,lastName,dateOfBirth,gender,username,email,password,phoneNum);
+      insertStats();
       return res.json("Success!");
     }
     for (var i = 0; i < result.length; i++) {
