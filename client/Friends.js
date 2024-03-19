@@ -1,5 +1,7 @@
 import { Pressable, View, Text, ScrollView, TextInput } from "react-native";
 import { useState, useEffect } from "react";
+import randomColor from "randomcolor";
+
 export const Friends = ({navigation, route}) => {
     const [userID, setUserid] = useState(route.params.userID);
     let listComponents = [];
@@ -39,11 +41,15 @@ export const Friends = ({navigation, route}) => {
 
     if(data != [] && data != null) {
         for(let i = 0; i < data.length; i++) {
+            let color = randomColor({
+                luminosity: 'light',
+             });
+            console.log(color);
             listComponents.push(
-                <View key={i} style={{alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 15, padding: 20, margin: 10, width: '100%'}}>
-                    <Text style={{marginBottom: 10, fontWeight: 700, fontSize:18}}>{data[i].firstName}</Text>
-                    <Text style={{margin: 5, alignSelf: 'flex-start'}}>Post by: {data[i].lastName}</Text>
-                    <Text style={{margin: 5}}>{data[i].medals}</Text>
+                <View key={i} style={{alignItems: 'center', backgroundColor: color, borderRadius: 15, padding: 20, margin: 10, width: 150, height: 150}}>
+                    <Text style={{marginBottom: 15, fontWeight: 700, fontSize:18}}>{data[i].firstName}</Text>
+                    <Text style={{margin: 5}}>Medals: {data[i].medals}</Text>
+                    <Text style={{margin: 5}}>Points: {data[i].points}</Text>
                 </View>
             );
         }
@@ -53,7 +59,7 @@ export const Friends = ({navigation, route}) => {
 
     const MyFriends = () => {
         return (
-            <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', padding: 10, marginBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
+            <ScrollView id="ArticleBtnContainer" style={{height: 'auto', width: '100%', marginBottom: 10, padding: 20, backgroundColor: 'white', flexDirection: 'col'}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {listComponents}
             </ScrollView>
         );
