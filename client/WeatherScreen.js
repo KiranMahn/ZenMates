@@ -4,11 +4,13 @@ import * as Location from "expo-location";
 import { fetchWeatherByCoordinates } from "./WeatherService";
 import * as Notifications from "expo-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AltitudeService from "./AltitudeService";
 
 const WeatherScreen = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [unitSystem, setUnitSystem] = useState("metric"); // default Celsius
+  const [unitSystem, setUnitSystem] = useState("metric");
+  const [altitude, setAltitude] = useState(null);
 
   useEffect(() => {
     fetchWeatherBasedOnLocation();
@@ -23,13 +25,17 @@ const WeatherScreen = () => {
       }
 
       const location = await Location.getCurrentPositionAsync({});
-      const { latitude, longitude } = location.coords;
+      const { latitude, longitude, altitude: currentAltitude } = location.coords;
+      setAltitude(currentAltitude);
       const data = await fetchWeatherByCoordinates(latitude, longitude);
       setWeatherData(data);
       setLoading(false);
 
       // Check weather conditions and send notifications
       sendNotifications(data);
+
+      // Check altitude
+      checkAltitude();
     } catch (error) {
       console.error("Error fetching weather based on location:", error);
     }
@@ -49,6 +55,13 @@ const WeatherScreen = () => {
     // Check for windy conditions
     if (data.wind.speed > 10) {
       sendNotification("Weather Alert", "It's windy outside");
+    }
+  };
+
+  const checkAltitude = async () => {
+    const shouldNotify = await AltitudeService.processAltitudeData();
+    if (shouldNotify) {
+      sendNotification("Altitude Alert", "Altitude is above 200 meters");
     }
   };
 
@@ -97,7 +110,7 @@ const WeatherScreen = () => {
           <View style={styles.weatherContainer}>
             <Image
               source={{
-                uri: `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`,
+                uri: https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png,
               }}
               style={styles.weatherIcon}
             />
@@ -116,6 +129,7 @@ const WeatherScreen = () => {
             Humidity: {weatherData.main.humidity}%
           </Text>
           <Text style={styles.details}>Wind: {weatherData.wind.speed} m/s</Text>
+          <Text style={styles.details}>Altitude: {altitude ? ${altitude.toFixed(2)} meters : 'N/A'}</Text>
         </>
       )}
     </View>
@@ -160,6 +174,7 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 10,
   },
+
   details: {
     fontSize: 16,
     color: "#666",
