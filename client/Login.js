@@ -13,6 +13,7 @@ const EntryScreen = ({navigation}) => {
       console.log("data in requests: ")
       console.log(JSON.stringify(jsonData));
       setData(jsonData);
+      setShowErr(false);
       navigation.navigate('Home', {id: jsonData[0]["profileID"]});
     })
     .catch(err => {
@@ -29,7 +30,7 @@ const EntryScreen = ({navigation}) => {
       console.log(err);
     }
   }
-
+  console.log(username);
   const ErrorPage = () => {
     return (
       <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center'}}>
@@ -63,15 +64,15 @@ const EntryScreen = ({navigation}) => {
           autoCapitalize={"none"}
           style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '70%', height: '8%', alignSelf: 'center', fontSize: 20, marginBottom:  20}}
         />
-  
+
         <Button
         title="Login"
         //onPress={() => handleLogin()}
         onPress={ () =>{
-          navigation.navigate('Home', {id: 0});
+          navigation.navigate('Home', {id: 1});
         }}>
         </Button>
-  
+
         <Button
         title="Don't have an account? Signup here"
         onPress={() => {
@@ -89,7 +90,7 @@ const EntryScreen = ({navigation}) => {
       {showError && <ErrorPage/>}
       <LoginPage/>
     </View>
-    
+
   );
 
 }

@@ -95,6 +95,13 @@ app.get("/loginform/:uname/:pass", (req, res) => {
   });
 });
 
+function insertProfile(firstName, lastName, dob, gender, username, email, password, phone) {
+  dbConfig.query(`INSERT INTO profiles (\`firstName\`, \`lastName\`, \`dob\`, \`gender\`, \`username\`, \`email\`, \`password\`, \`phone\`) VALUES (\'${firstName}\', \'${lastName}\', \'${dob}\', \'${gender}\', \'${username}\', \'${email}\', \'${password}\', \'${phone}\')`, (err, result) => {
+    if (err) throw err;
+    return 1;
+  });
+}
+
 app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => {
   const firstName = req.params.fname;
   const lastName = req.params.lname;
@@ -110,45 +117,56 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
   dbConfig.query(`SELECT * FROM profiles WHERE \`email\` = \'${email}\' OR \`username\` = \'${username}\' OR \`phone\` = \'${phoneNum}\'`, (err, result) => {
     if (err) throw err;
     if (result.length < 1) {
-      isEmail = 0;
-      isUsername = 0;
-      isPhone = 0;
-    }else if (result[0].email == email && result[0].username == username && result[0].phone == phoneNum) {
-      isEmail ++;
-      isUsername ++;
-      isPhone ++;
+      console.log("adding user");
+      insertProfile(firstName,lastName,dateOfBirth,gender,username,email,password,phoneNum);
+      return res.json("Success!");
+    }
+    for (var i = 0; i < result.length; i++) {
+      if (result[i].email == email && result[i].username == username && result[i].phone == phoneNum) {
+        isEmail ++;
+        isUsername ++;
+        isPhone ++;
+      }else if (result[i].email == email && result[i].username == username) {
+        isEmail ++;
+        isUsername ++;
+      }else if (result[i].email == email && result[i].phone == phoneNum) {
+        isEmail ++;
+        isPhone ++;
+      }else if (result[i].username == username && result[i].phone == phoneNum) {
+        isUsername ++;
+        isPhone ++;
+      }else if(result[i].email == email) {
+        isEmail ++;
+      }else if(result[i].username == username){
+        isUsername ++;
+      }else if(result[i].phone == phoneNum){
+        isPhone ++;
+      }
+    }
+    if (isEmail >= 1 && isUsername >= 1 && isPhone >= 1) {
       return res.json("1");
-    }else if (result[0].email == email && result[0].username == username) {
-      isEmail ++;
-      isUsername ++;
+      console.log("duplicates");
+    }else if(isEmail >= 1 && isUsername >= 1){
       return res.json("2");
-    }else if (result[0].email == email && result[0].phone == phoneNum) {
-      isEmail ++;
-      isPhone ++;
-      return res.json("3");
-    }else if (result[0].username == username && result[0].phone == phoneNum) {
-      isUsername ++;
-      isPhone ++;
+    }else if(isUsername >= 1 && isPhone >= 1){
       return res.json("4");
-    }else if(result[0].email == email) {
-      isEmail ++;
-      console.log("email exists")
+    }else if(isEmail >= 1 && isPhone >= 1){
+      return res.json("3");
+    }else if(isEmail >= 1 ){
       return res.json("5");
-    }else if(result[0].username == username){
-      isUsername ++;
+    }else if(isUsername >= 1){
       return res.json("6");
-    }else if(result[0].phone == phoneNum){
-      isPhone ++;
+    }else if(isPhone >= 1){
       return res.json("7");
     }
   });
-  if (isUsername < 1 && isEmail < 1 && isPhone < 1) {
+  /*if (isUsername == 0 && isEmail == 0 && isPhone == 0) {
     dbConfig.query(`INSERT INTO profiles (\`firstName\`, \`lastName\`, \`dob\`, \`gender\`, \`username\`, \`email\`, \`password\`, \`phone\`) VALUES (\'${firstName}\', \'${lastName}\', \'${dateOfBirth}\', \'${gender}\', \'${username}\', \'${email}\', \'${password}\', \'${phoneNum}\')`, (err, result) => {
       if (err) throw err;
       return res.json("Success!");
     });
   }else{
     return res.json("errors")
-  }
+  }*/
 
 });
