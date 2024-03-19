@@ -31,7 +31,7 @@ const ProfileScreen = ({navigation, route}) => {
           setData(jsonData);
           //set user stats
           setUsername(jsonData[0]["username"]);
-          setName(jsonData[0]["firstName"] + jsonData[0]["lastName"]);
+          setName(jsonData[0]["firstName"] + " " + jsonData[0]["lastName"]);
           setDOB(jsonData[0]["dob"]);
           setEmail(jsonData[0]["email"]);
           setPhoneNum(jsonData[0]["phone"]);
