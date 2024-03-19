@@ -1,6 +1,7 @@
 import { Pressable, View, Text, ScrollView, TextInput } from "react-native";
 import { useState, useEffect } from "react";
-export const Friends = () => {
+export const Friends = ({navigation, route}) => {
+    const [userID, setUserid] = useState(route.params.userID);
     let listComponents = [];
     const [contacts, setContacts] = useState();
     const [data, setData] = useState();
@@ -11,47 +12,45 @@ export const Friends = () => {
     
     useEffect(() => {
         const loadData = async () => {
-          let thisdata = { articles: []};
-          await fetch('http://localhost:8082/getDiscussionPosts/')
+          await fetch(`http://localhost:8082/getfriends/${userID}`)
           .then(result => result.json())
           .then(jsonData => {
-            thisdata.articles = jsonData;
             //console.log("data in requests: ")
             //console.log(JSON.stringify(thisdata));
-            setData(thisdata);
+            setData(jsonData);
           })
           .catch(err => {
             console.log(err);
           });
         }
         loadData();
-    
+
       }, []);
-  
-  
-  
+
+
+
     const handleClick = (contact) => {
       setSelected(contact.id);
       contactNumber = contact.phoneNumbers[0].digits;
       contactName = contact.firstName;
       navigation.navigate('Chat');
     }
-    
-  
-    if(data != null) {
-        for(let i = 0; i < data.articles.length; i++) {
+
+
+    if(data != [] && data != null) {
+        for(let i = 0; i < data.length; i++) {
             listComponents.push(
                 <View key={i} style={{alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 15, padding: 20, margin: 10, width: '100%'}}>
-                    <Text style={{marginBottom: 10, fontWeight: 700, fontSize:18}}>{data.articles[i].title}</Text>
-                    <Text style={{margin: 5, alignSelf: 'flex-start'}}>Post by: {data.articles[i].author}</Text>
-                    <Text style={{margin: 5}}>{data.articles[i].body}</Text>
+                    <Text style={{marginBottom: 10, fontWeight: 700, fontSize:18}}>{data[i].firstName}</Text>
+                    <Text style={{margin: 5, alignSelf: 'flex-start'}}>Post by: {data[i].lastName}</Text>
+                    <Text style={{margin: 5}}>{data[i].medals}</Text>
                 </View>
             );
         }
     }
-      
+
     console.log("list componenets: " + listComponents.toString())
-  
+
     const MyFriends = () => {
         return (
             <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', padding: 10, marginBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
@@ -83,7 +82,7 @@ export const Friends = () => {
                     onPress={() => {
                         navigation.navigate('Friends', {userID: userID})
                     }}>
-                    <Text style={{                                
+                    <Text style={{
                         textAlign: 'center'
                         }}>Add</Text>
                 </Pressable>
@@ -109,7 +108,7 @@ export const Friends = () => {
                         setShowMyFriends(false);
                         setSelected("addFriends");
                     }}>
-                    <Text style={{                                
+                    <Text style={{
                         textAlign: 'center'
                         }}>Add Friends</Text>
                 </Pressable>
@@ -122,14 +121,14 @@ export const Friends = () => {
                         width: "45%",
                         height: 45,
                         alignSelf: 'flex-start',
-           
+
                     }}
                     onPress={() => {
                         setShowAddFriends(false);
                         setShowMyFriends(true);
                         setSelected("myFriends");
                     }}>
-                    <Text style={{                                
+                    <Text style={{
                         textAlign: 'center'
                         }}>My Friends</Text>
                 </Pressable>
@@ -137,7 +136,7 @@ export const Friends = () => {
            {showMyFriends && <MyFriends/>}
            {showAddFriends && <AddFriend/>}
         </View>
-        
+
     );
 
 }

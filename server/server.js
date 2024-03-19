@@ -170,3 +170,37 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
   }*/
 
 });
+
+app.get("/getfriends/:id", (req, res) => {
+  const uID = req.params.id;
+  dbConfig.query(`SELECT profiles.profileID, profiles.firstName, profiles.lastName, profiles.username, userStats.medals, userStats.points, userStats.friends, userStats.posts FROM profiles INNER JOIN friends ON profiles.profileID = friends.initiatedUser OR profiles.profileID = friends.requestedUser INNER JOIN userStats ON profiles.profileID = userStats.userID WHERE (friends.initiatedUser = ${uID} OR friends.requestedUser = ${uID}) AND profiles.profileID != ${uID}`, (err, result) => {
+    if (err) throw err;
+    return res.json(result);
+
+  });
+});
+
+function insertFriends(uID, friendID) {
+  console.log("adding friend");
+  dbConfig.query(`INSERT INTO friends (\`initiatedUser\`, \`requestedUser\`) VALUES (\'${uID}\',\'${friendID}\')`, (err, result) => {
+    if (err) throw err;
+    return 1;
+  });
+}
+
+app.get("/makefriends/:id/:friend", (req, res) => {
+  const uID = req.params.id;
+  const friendUname = req.params.friend;
+  let friendID;
+  let friendExists = false;
+  dbConfig.query(`SELECT \`profileID\` FROM profiles WHERE \`username\` = \'${friendUname}\'`, (err, result) => {
+    if (err) throw err;
+    friendExists = true;
+    friendID = result[0].profileID;
+    if (friendExists) {
+      insertFriends(uID, friendID)
+    }
+    return res.json("friends added");
+  });
+
+});
