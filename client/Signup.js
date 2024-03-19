@@ -1,5 +1,6 @@
 import { View, Text, Button, StyleSheet, ButtonText, TextInput } from "react-native";
 import { useState } from "react";
+
 const EntryScreen = ({navigation}) => {
   const [firstName, setFirstName] = useState()
   const [lastName, setLastName] = useState()
@@ -76,7 +77,9 @@ const EntryScreen = ({navigation}) => {
       console.log(err);
     }
   }
+
   console.log(firstName);
+
   const ErrorPage = () => {
     return (
       <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center', width: '90%'}}>
@@ -87,7 +90,14 @@ const EntryScreen = ({navigation}) => {
   };
 
   const SignupPage = () => {
-    return (
+    
+
+  };
+
+
+  return (
+    <View>
+      {showError && <ErrorPage/>}
       <View style={{
         flexDirection: 'col',
         justifyContent: 'center',
@@ -100,59 +110,59 @@ const EntryScreen = ({navigation}) => {
           placeholder="First Name"
           value={firstName}
           onChangeText={setFirstName}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Last Name"
           value={lastName}
           onChangeText={setLastName}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Date of Birth (dd-mm-yyyy)"
           value={dob}
           onChangeText={setDOB}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Gender"
           value={gender}
           onChangeText={setGender}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Phone #"
           value={phoneNum}
           onChangeText={setPhoneNum}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Email"
           value={email}
           onChangeText={setEmail}
           autoCapitalize={"none"}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Username"
           value={username}
           onChangeText={setUsername}
           autoCapitalize={"none"}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={setPassword}
           autoCapitalize={"none"}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
         <TextInput
           placeholder="Re-enter password"
           value={password}
           onChangeText={setPassword}
           autoCapitalize={"none"}
-          style={{backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'}}
+          style={styles.TextInput}
         />
 
         <Button
@@ -163,18 +173,13 @@ const EntryScreen = ({navigation}) => {
         </Button>
 
       </View>
-    );
-
-  };
-
-
-  return (
-    <View>
-      {showError && <ErrorPage/>}
-      <SignupPage/>
     </View>
   );
 
 }
-
+const styles = StyleSheet.create({
+  TextInput: {
+    backgroundColor: 'white', padding: 10, borderRadius: 15, margin: 10, width: '50%', alignSelf: 'center'
+  }
+});
 export default EntryScreen;
