@@ -24,7 +24,11 @@ const EntryScreen = ({navigation}) => {
       console.log(JSON.stringify(jsonData));
       setData(jsonData);
       setShowErr(false);
-      navigation.navigate('Home', {id: jsonData[0]["profileID"]});
+      if (jsonData.length > 1) {
+        navigation.navigate('Home', {id: jsonData[0]["profileID"]});
+      }else {
+        setShowErr(true);
+      }
     })
     .catch(err => {
       setShowErr(true);
