@@ -202,5 +202,4 @@ app.get("/makefriends/:id/:friend", (req, res) => {
     }
     return res.json("friends added");
   });
-
 });
