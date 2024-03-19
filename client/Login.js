@@ -10,7 +10,16 @@ const ErrorPage = ({error}) => {
   );
 };
 
-const LoginPage = ({username, setUsername, password, setPassword, navigation}) => {
+const handleLogin = ({err}) => {
+  try {
+    loadData();
+    //console.log(data);
+  } catch (e) {
+    console.log(err);
+  }
+}
+
+const LoginPage = ({username, setUsername, password, setPassword, navigation, err}) => {
   return (
     <View style={{
       flexDirection: 'col',
@@ -37,10 +46,11 @@ const LoginPage = ({username, setUsername, password, setPassword, navigation}) =
 
       <Button
       title="Login"
-      //onPress={() => handleLogin()}
-      onPress={ () =>{
-        navigation.navigate('Home', {id: 1});
-      }}>
+      onPress={() => handleLogin(err)}
+      // onPress={ () =>{
+      //   navigation.navigate('Home', {id: 1});
+      // }}
+      >
       </Button>
 
       <Button
@@ -77,14 +87,7 @@ const EntryScreen = ({navigation}) => {
     });
   }
 
-  const handleLogin = () => {
-    try {
-      loadData();
-      //console.log(data);
-    } catch (e) {
-      console.log(err);
-    }
-  }
+
   console.log(username);
   
 
@@ -93,7 +96,7 @@ const EntryScreen = ({navigation}) => {
   return (
     <View>
       {showError && <ErrorPage error={error}/>}
-      <LoginPage username={username} setUsername={setUsername} password={password} setPassword={setPassword} navigation={navigation}/>
+      <LoginPage username={username} setUsername={setUsername} password={password} setPassword={setPassword} navigation={navigation} err={error}/>
     </View>
 
   );
