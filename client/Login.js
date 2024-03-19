@@ -1,5 +1,13 @@
 import { View, Text, Button, StyleSheet, ButtonText, TextInput } from "react-native";
 import { useState, useEffect } from "react";
+const ErrorPage = ({error}) => {
+  return (
+    <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center', top: 0}}>
+      <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Error</Text>
+      <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>{error}</Text>
+    </View>
+  );
+};
 
 const EntryScreen = ({navigation}) => {
   const [username, setUsername] = useState();
@@ -20,7 +28,8 @@ const EntryScreen = ({navigation}) => {
     })
     .catch(err => {
       setShowErr(true);
-      setError(err);
+      console.log("err: " + err)
+      setError(err.toString());
       console.log(err);
     });
   }
@@ -31,6 +40,8 @@ const EntryScreen = ({navigation}) => {
       //console.log(data);
     } catch (e) {
       console.log(err);
+      console.log(e);
+
     }
   }
 
@@ -44,6 +55,7 @@ const EntryScreen = ({navigation}) => {
       alignSelf: 'flex-start',
       marginTop: 1,
       }}>
+      {showError && <ErrorPage error={error}/>}
       <TextInput
         placeholder="Username"
         value={username}
