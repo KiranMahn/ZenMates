@@ -9,20 +9,36 @@ const HomeScreen = ({navigation, route}) => {
     return (
         <View>
             <View style={styles.container}>
-                <View style={{width: '100%', height: '10%', marginTop: 20}}>
-                        {/* Profile button */}
+                <View style={styles.btnContainer}>
+                    <View style={{width: '100%', height: '10%', flexDirection: 'row', justifyContent: 'space-between'}}>
+                        {/* Friends button */}
                         <Pressable
                             style={{
-                                flex: 1,
                                 justifyContent: 'center',
                                 borderRadius: 15,
                                 backgroundColor: 'rgba(202, 227,248, 0.5)',
                                 marginHorizontal: '1%',
-                                minWidth: 55,
-                                maxWidth: 55,
-                                minHeight: 55,
-                                maxHeight: 55,
-                                alignSelf: 'flex-end',
+                                width: 65,
+                                height: 45,
+                                alignSelf: 'flex-start',
+                            }}
+                            title="friends"
+                            onPress={() => {
+                                navigation.navigate('Friends', {userID: userID})
+                            }}>
+                            <Text style={{                                
+                                textAlign: 'center'
+                                }}>Friends</Text>
+                        </Pressable>
+                        {/* Profile button */}
+                        <Pressable
+                            style={{
+                                justifyContent: 'center',
+                                borderRadius: 15,
+                                backgroundColor: 'rgba(202, 227,248, 0.5)',
+                                marginHorizontal: '1%',
+                                width: 55, 
+                                height: 55,
                             }}
                             title=""
                             onPress={() => {

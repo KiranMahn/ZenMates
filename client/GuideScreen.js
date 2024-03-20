@@ -4,7 +4,7 @@ import { Component, useEffect, useState } from "react";
 /* Contains a list of mindfulness mini articles */
 
 const GuideScreen = ({navigation, route}) => {
-  let user = route.params.user;
+  let userID = route.params.userID;
   const [data, setData] = useState();
 
   // get data for all articles
@@ -31,7 +31,7 @@ const GuideScreen = ({navigation, route}) => {
   let listComponents = [];
 
   const handleClick = (id) => {
-    navigation.navigate('ArticleDetails', {itemId: id})
+    navigation.navigate('ArticleDetails', {itemId: id, userID: userID})
   }
 
 
@@ -41,16 +41,16 @@ const GuideScreen = ({navigation, route}) => {
     for(let i = 0; i < data.articles.length; i++) {
 
       listComponents.push(
-            <TouchableOpacity key={data.articles[i]["articleID"]} style={{display:'flex', flex: 1, width: '100%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 10, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}} onPress={() => handleClick(data.articles[i]["articleID"])}>
-              <View>
-                <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
-              </View>
-              <View style={{flexDirection: 'col', height: '100%', flex: 1}}>
-                <Text style={{fontSize: 20, margin: 10, fontWeight: 'bold', flex: 1}}>{data.articles[i]["title"]}</Text>
-                <Text style={{fontSize: 15, margin: 5, flex: 1, flexWrap: 'wrap', width: '80%'}}>{data.articles[i]["description"]}</Text>
-              </View>
-              <Text style={{margin: 15, fontSize: 30, position: 'absolute', right: 5, flex: 1}}>&rarr;</Text>
-            </TouchableOpacity>
+          <TouchableOpacity key={data.articles[i]["articleID"]} style={{display:'flex', flex: 1, width: '100%', backgroundColor: 'rgba(202, 227,248, 0.5)', margin: 10, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row', borderRadius: 15}} onPress={() => handleClick(data.articles[i]["articleID"])}>
+            <View>
+              <Image source={require('./assets/bookIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
+            </View>
+            <View style={{flexDirection: 'col', height: '100%', flex: 1}}>
+              <Text style={{fontSize: 20, margin: 10, fontWeight: 'bold', height: '20%'}}>{data.articles[i]["title"]}</Text>
+              <Text style={{fontSize: 15, margin: 5, flexWrap: 'wrap', width: '80%'}}>{data.articles[i]["description"]}</Text>
+            </View>
+            <Text style={{margin: 15, fontSize: 30, position: 'absolute', right: 5, flex: 1}}>&rarr;</Text>
+          </TouchableOpacity>
       );
     }
 

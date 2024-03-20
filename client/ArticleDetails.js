@@ -1,8 +1,10 @@
 import { Text, View, Image } from "react-native";
 import { useState, useEffect } from "react";
+import { ScrollView } from "react-native";
 /* Contains a list of mindfulness mini articles */
 
 const ArticleDetails = ({navigation, route}) => {
+  let userID = route.params.userID;
   let itemId = route.params.itemId;
   const [data, setData] = useState();
   //console.log(itemId);
@@ -10,7 +12,7 @@ const ArticleDetails = ({navigation, route}) => {
   useEffect(() => {
     const loadData = async () => {
       let thisdata = { articles: []};
-      await fetch(`http://localhost:8082/getarticledata/${itemId}/`)
+      await fetch(`http://localhost:8082/getarticledata/${itemId}/${userID}`)
       .then(result => result.json())
       .then(jsonData => {
         thisdata.articles = jsonData;
@@ -55,18 +57,14 @@ const ArticleDetails = ({navigation, route}) => {
     )
 
     return (
-        <View>
-            {listComponents}
-        </View>
-
-
-
-
-
+        <ScrollView id="ArticleBtnContainer" style={{ flex: 1, height: 'auto', width: '100%', paddingBottom: 10}} contentContainerStyle={{alignItems: 'center', justifyContent:'space-between', flexGrow: 1}}>
+          {listComponents}
+        </ScrollView>
     );
   } else {
     return (
       <View>
+
         <Text>Loading...</Text>
       </View>
     )

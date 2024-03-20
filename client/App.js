@@ -20,8 +20,10 @@ import WeatherScreen from "./WeatherScreen";
 import NotificationHistory from "./NotificationHistoryScreen";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import ChooseContact from './ChooseContact';
 const Stack = createNativeStackNavigator();
-
+import { useState } from "react";
+import { Friends } from "./Friends";
 export default function App() {
   useEffect(() => {
     registerForPushNotificationsAsync();
@@ -70,6 +72,7 @@ export default function App() {
     <GluestackUIProvider config={config}>
       <NavigationContainer>
         <Stack.Navigator>
+
          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen
@@ -102,6 +105,18 @@ export default function App() {
             initialParams={{ itemId: 0 }}
           />
           <Stack.Screen name="CreatePost" component={CreatePost} />
+            
+          {/* Choose Contact */}
+          <Stack.Screen 
+            name="ChooseContact" 
+            component={ChooseContact} 
+          />
+          {/* Friends */}
+          <Stack.Screen 
+            name="Friends" 
+            component={Friends} 
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
