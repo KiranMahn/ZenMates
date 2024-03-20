@@ -9,45 +9,45 @@ const HomeScreen = ({navigation, route}) => {
     return (
         <View>
             <View style={styles.container}>
+                <View style={{width: '100%', height: '10%', flexDirection: 'row', justifyContent: 'space-between', marginTop: '10%'}}>
+                    {/* Friends button */}
+                    <Pressable
+                        style={{
+                            justifyContent: 'center',
+                            borderRadius: 15,
+                            backgroundColor: 'rgba(202, 227,248, 0.5)',
+                            marginHorizontal: '1%',
+                            width: 65,
+                            height: 45,
+                            alignSelf: 'flex-start',
+                        }}
+                        title="friends"
+                        onPress={() => {
+                            navigation.navigate('Friends', {userID: userID})
+                        }}>
+                        <Text style={{                                
+                            textAlign: 'center'
+                            }}>Friends</Text>
+                    </Pressable>
+                    {/* Profile button */}
+                    <Pressable
+                        style={{
+                            justifyContent: 'center',
+                            borderRadius: 15,
+                            backgroundColor: 'rgba(202, 227,248, 0.5)',
+                            marginHorizontal: '1%',
+                            width: 55, 
+                            height: 55,
+                        }}
+                        title=""
+                        onPress={() => {
+                            navigation.navigate('Profile', {userID: userID})
+                        }}>
+                        <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
+                    </Pressable>
+                </View>
                 <View style={styles.btnContainer}>
-                    <View style={{width: '100%', height: '10%', flexDirection: 'row', justifyContent: 'space-between'}}>
-                        {/* Friends button */}
-                        <Pressable
-                            style={{
-                                justifyContent: 'center',
-                                borderRadius: 15,
-                                backgroundColor: 'rgba(202, 227,248, 0.5)',
-                                marginHorizontal: '1%',
-                                width: 65,
-                                height: 45,
-                                alignSelf: 'flex-start',
-                            }}
-                            title="friends"
-                            onPress={() => {
-                                navigation.navigate('Friends', {userID: userID})
-                            }}>
-                            <Text style={{                                
-                                textAlign: 'center'
-                                }}>Friends</Text>
-                        </Pressable>
-                        {/* Profile button */}
-                        <Pressable
-                            style={{
-                                justifyContent: 'center',
-                                borderRadius: 15,
-                                backgroundColor: 'rgba(202, 227,248, 0.5)',
-                                marginHorizontal: '1%',
-                                width: 55, 
-                                height: 55,
-                            }}
-                            title=""
-                            onPress={() => {
-                                navigation.navigate('Profile', {userID: userID})
-                            }}>
-                            <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
-                        </Pressable>
-                    </View>
-                <View style={styles.btnContainer}>
+                    
                     
 
                     {/* Mindfulness Guide button */}
@@ -87,7 +87,7 @@ const HomeScreen = ({navigation, route}) => {
                         onPress={() => {
                             navigation.navigate("Weather", { user: userID });
                         }}
-                    >
+                        >
                         <Image
                             source={require("./assets/cloud.png")}
                             style={{ alignSelf: "center", margin: 10, width: 50, height: 50 }}
@@ -148,6 +148,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         margin: 10
     },
-  });
+});
 
   export {HomeScreen, ProfileScreen};
