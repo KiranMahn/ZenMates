@@ -49,15 +49,15 @@ export const Friends = ({navigation, route}) => {
             .then(jsonData => {
               console.log("data in requests: ")
               console.log(JSON.stringify(jsonData));
-              if (jsonData == "friend added") {
-                setShowSuccessPage(true);
-                setFriendMessage("Friend successfully added!");
+              if (jsonData == "user does not exist") {
+                setShowErrorPage(true);
+                setFriendMessage("user does not exist");
               }else if (jsonData == "friends already added") {
                 setShowErrorPage(true);
                 setFriendMessage(`You and ${addFriendsUsername} are already friends`);
               }else{
-                setShowErrorPage(true);
-                setFriendMessage("user does not exist");
+                setShowSuccessPage(true);
+                setFriendMessage("Friend successfully added!");
               }
               console.log(friendMessage);
             })

@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require("cors");
 const dbConfig = require("./db.js");
 const article = require("./ArticleController");
+const util = require('util');
 //import {ArticleCount} from "./ArticleController";
 //import express;
 //import mysql;
@@ -188,14 +189,14 @@ function insertFriends(uID, friendID) {
   });
 }
 
-function checkFriends(uID, friendID) {
+function checkFriends(uID, friendID, callback) {
   dbConfig.query(`SELECT * FROM friends WHERE (\`initiatedUser\` = \'${uID}\' AND \`requestedUser\` = \'${friendID}\') OR (\`initiatedUser\` = \'${friendID}\' AND \`requestedUser\` = \'${uID}\')`, (err, result) => {
     if (err) throw err;
     if (result.length < 1) {
       insertFriends(uID, friendID);
-      return 0;
+      callback(0);
     }else {
-      return 1;
+      callback(1);
     }
   });
 }
@@ -219,13 +220,14 @@ app.get("/makefriends/:id/:friend", (req, res) => {
       friendExists = true;
     }
     if (friendExists) {
-        console.log("adding");
-        const check = checkFriends(uID, friendID);
-        if (check == 0) {
-          return res.json("friend added");
-        }else {
-          return res.json("friends already added");
-        }
+        checkFriends(uID, friendID, (check) => {
+          if (check == 0) {
+            return res.json("friend added");
+          }else {
+            return res.json("friends already added");
+          }
+        });
+
     }else{
       return res.json("user does not exist");
     }
