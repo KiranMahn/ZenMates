@@ -19,6 +19,7 @@ const AddFriend = ({addFriendsUsername, setAddFriendUsername}) => {
                 placeholder="Username"
                 value={addFriendsUsername}
                 onChangeText={setAddFriendUsername}
+                autoCapitalize={"none"}
                 style={{backgroundColor: 'whitesmoke', padding: 10, borderRadius: 15, margin: 10, width: '80%', alignSelf: 'center', fontSize: 20}}
             />
             <Pressable
@@ -31,7 +32,7 @@ const AddFriend = ({addFriendsUsername, setAddFriendUsername}) => {
                     height: 45,
                 }}
                 onPress={() => {
-                    navigation.navigate('Friends', {userID: userID})
+                    pushData();
                 }}>
                 <Text style={{
                     textAlign: 'center'
@@ -50,7 +51,7 @@ export const Friends = ({navigation, route}) => {
     const [showAddFriends, setShowAddFriends] = useState(false);
     const [addFriendsUsername, setAddFriendUsername] = useState();
     const [selected, setSelected] = useState("myFriends");
-    
+
     useEffect(() => {
         const loadData = async () => {
           await fetch(`http://localhost:8082/getfriends/${userID}`)
@@ -68,7 +69,27 @@ export const Friends = ({navigation, route}) => {
 
       }, []);
 
-
+      const pushData = async () => {
+          if (addFriendsUsername != undefined) {
+            await fetch(`http://localhost:8082/makefriends/${userID}/${addFriendsUsername}/`)
+            .then(result => result.json())
+            .then(jsonData => {
+              //console.log("data in requests: ")
+              //console.log(JSON.stringify(thisdata));
+              if (jsonData == "friend added") {
+                setFriendMessage("Friend successfully added!");
+              }else if (jsonData == "friends already added") {
+                setFriendMessage(`You and ${addFriendsUsername} are already friends`);
+              }else{
+                setFriendMessage("user does not exist");
+              }
+              //console.log(addFriendMessage);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          }
+        }
 
     const handleClick = (contact) => {
       setSelected(contact.id);

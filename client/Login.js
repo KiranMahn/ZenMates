@@ -46,10 +46,10 @@ const LoginPage = ({username, setUsername, password, setPassword, navigation, er
 
       <Button
       title="Login"
-      onPress={() => handleLogin(err)}
-      // onPress={ () =>{
-      //   navigation.navigate('Home', {id: 1});
-      // }}
+      //onPress={() => handleLogin(err)}
+      onPress={ () =>{
+         navigation.navigate('Home', {id: 1});
+      }}
       >
       </Button>
 
@@ -90,9 +90,9 @@ const EntryScreen = ({navigation}) => {
 
 
   console.log(username);
-  
 
-  
+
+
 
   return (
     <View>
