@@ -57,16 +57,22 @@ app.get("/makeDiscussionPost/:id/:title/:body", (req, res) => {
   dbConfig.query(`UPDATE userStats SET posts = posts + 1 WHERE userStats.userID = ${authID}`, (err, result) => {
     if (err) throw err;
   });
+  dbConfig.query(`UPDATE userStats SET points = points + 100 WHERE userStats.userID = ${authID}`, (err, result) => {
+    if (err) throw err;
+  });
 
 });
 
 
-app.get("/getarticledata/:id", (req, res) => {
+app.get("/getarticledata/:id/:userid", (req, res) => {
   const artid = req.params.id;
+  const uID = req.params.userid;
   dbConfig.query(`SELECT * FROM articles WHERE \`articleID\` = \'${artid}\'`, (err, result) => {
     if (err) throw err;
     return res.json(result);
-
+  });
+  dbConfig.query(`UPDATE userStats SET points = points + 5 WHERE userStats.userID = ${uID}`, (err, result) => {
+    if (err) throw err;
   });
 });
 

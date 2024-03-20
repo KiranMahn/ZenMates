@@ -4,7 +4,7 @@ import { Component, useEffect, useState } from "react";
 /* Contains a list of mindfulness mini articles */
 
 const GuideScreen = ({navigation, route}) => {
-  let user = route.params.user;
+  let userID = route.params.userID;
   const [data, setData] = useState();
 
   // get data for all articles
@@ -31,7 +31,7 @@ const GuideScreen = ({navigation, route}) => {
   let listComponents = [];
 
   const handleClick = (id) => {
-    navigation.navigate('ArticleDetails', {itemId: id})
+    navigation.navigate('ArticleDetails', {itemId: id, userID: userID})
   }
 
 
