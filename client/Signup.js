@@ -110,30 +110,35 @@ const EntryScreen = ({navigation}) => {
           placeholder="First Name"
           value={firstName}
           onChangeText={setFirstName}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
           placeholder="Last Name"
           value={lastName}
           onChangeText={setLastName}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
           placeholder="Date of Birth (dd-mm-yyyy)"
           value={dob}
           onChangeText={setDOB}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
           placeholder="Gender"
           value={gender}
           onChangeText={setGender}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
           placeholder="Phone #"
           value={phoneNum}
           onChangeText={setPhoneNum}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
@@ -141,6 +146,7 @@ const EntryScreen = ({navigation}) => {
           value={email}
           onChangeText={setEmail}
           autoCapitalize={"none"}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
@@ -148,6 +154,7 @@ const EntryScreen = ({navigation}) => {
           value={username}
           onChangeText={setUsername}
           autoCapitalize={"none"}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
@@ -155,6 +162,7 @@ const EntryScreen = ({navigation}) => {
           value={password}
           onChangeText={setPassword}
           autoCapitalize={"none"}
+          autoCorrect={false}
           style={styles.TextInput}
         />
         <TextInput
@@ -162,6 +170,7 @@ const EntryScreen = ({navigation}) => {
           value={password}
           onChangeText={setPassword}
           autoCapitalize={"none"}
+          autoCorrect={false}
           style={styles.TextInput}
         />
 
