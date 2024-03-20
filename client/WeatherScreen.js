@@ -110,7 +110,7 @@ const WeatherScreen = () => {
           <View style={styles.weatherContainer}>
             <Image
               source={{
-                uri: https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png,
+                uri: 'https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png',
               }}
               style={styles.weatherIcon}
             />
@@ -129,7 +129,7 @@ const WeatherScreen = () => {
             Humidity: {weatherData.main.humidity}%
           </Text>
           <Text style={styles.details}>Wind: {weatherData.wind.speed} m/s</Text>
-          <Text style={styles.details}>Altitude: {altitude ? ${altitude.toFixed(2)} meters : 'N/A'}</Text>
+           <Text style={styles.details}>Altitude: {altitude ? altitude.toFixed(2) + ' meters' : 'N/A'}</Text>
         </>
       )}
     </View>
