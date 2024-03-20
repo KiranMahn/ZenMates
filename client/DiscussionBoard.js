@@ -1,6 +1,8 @@
 import { Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView, Button } from "react-native";
 import { getDiscussionPosts } from "./Requests";
 import { Component, useState, useEffect } from "react";
+import randomColor from "randomcolor";
+
 /* Contains a list of mindfulness mini articles */
 
 
@@ -37,8 +39,9 @@ const DiscussionBoard = ({navigation, route}) => {
 
   if(data != null) {
     for(let i = 0; i < data.articles.length; i++) {
+      let color = randomColor({luminosity: 'light', hue: 'blue'});
       listComponents.push(
-            <View key={i} style={{alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 15, padding: 20, margin: 10, width: '100%'}}>
+            <View key={i} style={{alignItems: 'center', backgroundColor: color, borderRadius: 15, padding: 20, margin: 10, width: '100%'}}>
               <Text style={{marginBottom: 10, fontWeight: 700, fontSize:18}}>{data.articles[i].title}</Text>
               <Text style={{margin: 5, alignSelf: 'flex-start'}}>Post by: {data.articles[i].firstName }</Text>
               <Text style={{margin: 5}}>{data.articles[i].body}</Text>

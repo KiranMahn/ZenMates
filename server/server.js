@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require("cors");
 const dbConfig = require("./db.js");
 const article = require("./ArticleController");
+const util = require('util');
 //import {ArticleCount} from "./ArticleController";
 //import express;
 //import mysql;
@@ -190,8 +191,9 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
 
 });
 
+
 function updateProfile(uID, firstName, lastName, gender, phone) {
-  dbConfig.query(`UPDATE profiles SET \`firstName\` = \'${firstName}\', \`lastName\` = \'${lastName}\', \`gender\` = \'${gender}\', \`phone\` = \'${phone}\' WHERE profiles.profileID = ${uID}`, (err, result) => {
+  dbConfig.query(UPDATE profiles SET \firstName` = '${firstName}', `lastName` = '${lastName}', `gender` = '${gender}', `phone` = '${phone}' WHERE profiles.profileID = ${uID}`, (err, result) => {
     if (err) throw err;
     return 1;
   });
@@ -227,11 +229,36 @@ app.get("/getfriends/:id", (req, res) => {
 });
 
 
-app.get("/awardmedal/:id", (req, res) => {
+app.get("/getfriends/:id", (req, res) => {
   const uID = req.params.id;
-  dbConfig.query(`UPDATE userStats SET medals = medals + 1 WHERE userStats.userID = ${uID}`, (err, result) => {
+  dbConfig.query(`SELECT profiles.profileID, profiles.firstName, profiles.lastName, profiles.username, userStats.medals, userStats.points, userStats.friends, userStats.posts FROM profiles INNER JOIN friends ON profiles.profileID = friends.initiatedUser OR profiles.profileID = friends.requestedUser INNER JOIN userStats ON profiles.profileID = userStats.userID WHERE (friends.initiatedUser = ${uID} OR friends.requestedUser = ${uID}) AND profiles.profileID != ${uID}`, (err, result) => {
     if (err) throw err;
     return res.json(result);
+  });
+});
 
+app.get("/makefriends/:id/:friend", (req, res) => {
+  const uID = req.params.id;
+  const friendUname = req.params.friend;
+  let friendID;
+  let friendExists = false;
+  dbConfig.query(`SELECT \`profileID\` FROM profiles WHERE \`username\` = \'${friendUname}\'`, (err, result) => {
+    if (err) throw err;
+    if (result.length > 0) {
+      friendID = result[0].profileID;
+      friendExists = true;
+    }
+    if (friendExists) {
+        checkFriends(uID, friendID, (check) => {
+          if (check == 0) {
+            return res.json("friend added");
+          }else {
+            return res.json("friends already added");
+          }
+        });
+
+    }else{
+      return res.json("user does not exist");
+    }
   });
 });

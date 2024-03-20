@@ -79,6 +79,8 @@ const ProfileScreen = ({navigation, route}) => {
         setEditColor('lightgrey')
         setEditIcon(require('./assets/check.png'))
       } else {
+        console.log("Posting data...");
+        // post data
         setEditColor('white')
         setEditIcon(require('./assets/pen.png'))
         postData();
