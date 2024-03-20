@@ -11,36 +11,6 @@ const MyFriends = ({listComponents}) => {
 
 };
 
-const AddFriend = ({addFriendsUsername, setAddFriendUsername}) => {
-    return (
-        <View style={{width: '100%', height: '50%', flexDirection: 'col', alignItems: 'center', justifyContent: 'space-evenly', padding: 20}}>
-            <Text>Enter your friends username</Text>
-            <TextInput
-                placeholder="Username"
-                value={addFriendsUsername}
-                onChangeText={setAddFriendUsername}
-                autoCapitalize={"none"}
-                style={{backgroundColor: 'whitesmoke', padding: 10, borderRadius: 15, margin: 10, width: '80%', alignSelf: 'center', fontSize: 20}}
-            />
-            <Pressable
-                style={{
-                    justifyContent: 'center',
-                    borderRadius: 15,
-                    backgroundColor: 'rgba(78, 165, 65, 1)',
-                    marginHorizontal: '1%',
-                    width: "30%",
-                    height: 45,
-                }}
-                onPress={() => {
-                    pushData();
-                }}>
-                <Text style={{
-                    textAlign: 'center'
-                    }}>Add</Text>
-            </Pressable>
-        </View>
-    );
-};
 
 export const Friends = ({navigation, route}) => {
     const [userID, setUserid] = useState(route.params.userID);
@@ -51,14 +21,16 @@ export const Friends = ({navigation, route}) => {
     const [showAddFriends, setShowAddFriends] = useState(false);
     const [addFriendsUsername, setAddFriendUsername] = useState();
     const [selected, setSelected] = useState("myFriends");
-
+    const [friendMessage, setFriendMessage] = useState();
+    const [showErrorPage, setShowErrorPage] = useState(false);
+    const [showSuccessPage, setShowSuccessPage] = useState(false);
     useEffect(() => {
         const loadData = async () => {
           await fetch(`http://localhost:8082/getfriends/${userID}`)
           .then(result => result.json())
           .then(jsonData => {
-            //console.log("data in requests: ")
-            //console.log(JSON.stringify(thisdata));
+            // console.log("data in requests: ")
+            // console.log(JSON.stringify(thisdata));
             setData(jsonData);
           })
           .catch(err => {
@@ -70,20 +42,24 @@ export const Friends = ({navigation, route}) => {
       }, []);
 
       const pushData = async () => {
+        console.log("in push dataa");
           if (addFriendsUsername != undefined) {
             await fetch(`http://localhost:8082/makefriends/${userID}/${addFriendsUsername}/`)
             .then(result => result.json())
             .then(jsonData => {
-              //console.log("data in requests: ")
-              //console.log(JSON.stringify(thisdata));
+              console.log("data in requests: ")
+              console.log(JSON.stringify(jsonData));
               if (jsonData == "friend added") {
+                setShowSuccessPage(true);
                 setFriendMessage("Friend successfully added!");
               }else if (jsonData == "friends already added") {
+                setShowErrorPage(true);
                 setFriendMessage(`You and ${addFriendsUsername} are already friends`);
               }else{
+                setShowErrorPage(true);
                 setFriendMessage("user does not exist");
               }
-              //console.log(addFriendMessage);
+              console.log(friendMessage);
             })
             .catch(err => {
               console.log(err);
@@ -98,6 +74,23 @@ export const Friends = ({navigation, route}) => {
       navigation.navigate('Chat');
     }
 
+    const ErrorPage = () => {
+        return (
+          <View style={{height: '12%', backgroundColor: '#cc0000', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center', width: '90%', zIndex: 3, bottom: 0}}>
+            <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Error</Text>
+            <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>Invalid fields: {friendMessage}. Please try again</Text>
+          </View>
+        );
+      };
+
+      const Success = () => {
+        return (
+          <View style={{height: '12%', backgroundColor: 'rgba(78, 165, 65, 1)', borderRadius: '15', padding: 10, margin: 20, justifyContent: 'center', alignItems: 'center', position: 'absolute', alignSelf: 'center', width: '90%', zIndex: 3, bottom: 0}}>
+            <Text style={{fontSize: 20, fontWeight: 700, marginBottom: 10, color: 'white'}}>Success</Text>
+            <Text style={{color: 'white', fontSize: 15, fontWeight: 600, textAlign: 'center'}}>{friendMessage}</Text>
+          </View>
+        );
+      };
 
     if(data != [] && data != null) {
         for(let i = 0; i < data.length; i++) {
@@ -119,6 +112,8 @@ export const Friends = ({navigation, route}) => {
 
     return (
         <View style={{height: '100%', backgroundColor: 'white'}}>
+            {showErrorPage && <ErrorPage/>}
+            {showSuccessPage && <Success/>}
             <View style={{padding: 20, flexDirection: 'row'}}>
                 <Pressable
                     style={{
@@ -154,6 +149,8 @@ export const Friends = ({navigation, route}) => {
                         setShowAddFriends(false);
                         setShowMyFriends(true);
                         setSelected("myFriends");
+                        setShowErrorPage(false);
+                        setShowSuccessPage(false);
                     }}>
                     <Text style={{
                         textAlign: 'center'
@@ -161,7 +158,33 @@ export const Friends = ({navigation, route}) => {
                 </Pressable>
             </View>
            {showMyFriends && <MyFriends listComponents={listComponents}/>}
-           {showAddFriends && <AddFriend addFriendsUsername={addFriendsUsername} setAddFriendUsername={setAddFriendUsername}/> }
+           {showAddFriends && <View style={{width: '100%', height: '50%', flexDirection: 'col', alignItems: 'center', justifyContent: 'space-evenly', padding: 20}}>
+            <Text>Enter your friends username</Text>
+            <TextInput
+                placeholder="Username"
+                value={addFriendsUsername}
+                onChangeText={setAddFriendUsername}
+                autoCapitalize={"none"}
+                autoCorrect={false}
+                style={{backgroundColor: 'whitesmoke', padding: 10, borderRadius: 15, margin: 10, width: '80%', alignSelf: 'center', fontSize: 20}}
+            />
+            <Pressable
+                style={{
+                    justifyContent: 'center',
+                    borderRadius: 15,
+                    backgroundColor: 'rgba(78, 165, 65, 1)',
+                    marginHorizontal: '1%',
+                    width: "30%",
+                    height: 45,
+                }}
+                onPress={() => {
+                    pushData();
+                }}>
+                <Text style={{
+                    textAlign: 'center'
+                    }}>Add</Text>
+            </Pressable>
+        </View>}
         </View>
     );
 }
