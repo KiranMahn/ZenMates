@@ -47,6 +47,8 @@ const HomeScreen = ({navigation, route}) => {
                             <Image source={require('./assets/userIcon.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         </Pressable>
                     </View>
+                <View style={styles.btnContainer}>
+                    
 
                     {/* Mindfulness Guide button */}
                     <Pressable
@@ -78,6 +80,20 @@ const HomeScreen = ({navigation, route}) => {
                         <Image source={require('./assets/blog.png')} style={{alignSelf: 'center', margin: 10,}}/>
                         <Text style={{textAlign: 'center'}}>Discussion Board</Text>
                     </Pressable>
+                             {/* weather button */}
+                    <Pressable
+                        style={styles.pageButton}
+                        title="Weather"
+                        onPress={() => {
+                            navigation.navigate("Weather", { user: userID });
+                        }}
+                    >
+                        <Image
+                            source={require("./assets/cloud.png")}
+                            style={{ alignSelf: "center", margin: 10, width: 50, height: 50 }}
+                        />
+                        <Text style={{ textAlign: "center" }}>Weather</Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
@@ -107,7 +123,13 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
         alignSelf: 'flex-start',
-        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        height: '20%',
+        justifyContent: 'center',
+        marginTop: '20%',
+        marginBottom: '20%'
+
     },
     pageButton: {
         flex: 1,
@@ -117,13 +139,14 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         backgroundColor: 'rgba(202, 227,248, 0.5)',
         // alignSelf: 'flex-start',
-        marginHorizontal: '1%',
+        marginHorizontal: 10,
         // marginBottom: 6,
         minWidth: 150,
         maxWidth: 200,
         minHeight: 150,
         maxHeight: 150,
         alignSelf: 'center',
+        margin: 10
     },
   });
 
