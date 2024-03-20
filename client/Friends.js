@@ -43,6 +43,8 @@ export const Friends = ({navigation, route}) => {
 
       const pushData = async () => {
         console.log("in push dataa");
+        setShowSuccessPage(false);
+        setShowErrorPage(false);
           if (addFriendsUsername != undefined) {
             await fetch(`http://localhost:8082/makefriends/${userID}/${addFriendsUsername}/`)
             .then(result => result.json())
