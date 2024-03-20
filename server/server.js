@@ -193,7 +193,7 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
 
 
 function updateProfile(uID, firstName, lastName, gender, phone) {
-  dbConfig.query(UPDATE profiles SET \firstName` = '${firstName}', `lastName` = '${lastName}', `gender` = '${gender}', `phone` = '${phone}' WHERE profiles.profileID = ${uID}`, (err, result) => {
+  dbConfig.query(`UPDATE profiles SET \`firstName\` = \'${firstName}\', \`lastName\` = \'${lastName}\', \`gender\` = \'${gender}\', \`phone\` = \'${phone}\' WHERE profiles.profileID = ${uID}`, (err, result) => {
     if (err) throw err;
     return 1;
   });
@@ -218,17 +218,6 @@ app.get("/updateuser/:id/:fname/:lname/:gen/:phn", (req, res) => {
   });
 });
 
-
-app.get("/getfriends/:id", (req, res) => {
-  const uID = req.params.id;
-  dbConfig.query(`SELECT \`firstName\`,\`lastName\` FROM profiles INNER JOIN friends ON profiles.profileID = friends.initiatedUser OR profiles.profileID = friends.requestedUser WHERE (friends.initiatedUser = ${uID} OR friends.requestedUser = ${uID}) AND profiles.profileID != ${uID};`, (err, result) => {
-    if (err) throw err;
-    return res.json(result);
-
-  });
-});
-
-
 app.get("/getfriends/:id", (req, res) => {
   const uID = req.params.id;
   dbConfig.query(`SELECT profiles.profileID, profiles.firstName, profiles.lastName, profiles.username, userStats.medals, userStats.points, userStats.friends, userStats.posts FROM profiles INNER JOIN friends ON profiles.profileID = friends.initiatedUser OR profiles.profileID = friends.requestedUser INNER JOIN userStats ON profiles.profileID = userStats.userID WHERE (friends.initiatedUser = ${uID} OR friends.requestedUser = ${uID}) AND profiles.profileID != ${uID}`, (err, result) => {
@@ -236,6 +225,34 @@ app.get("/getfriends/:id", (req, res) => {
     return res.json(result);
   });
 });
+
+
+function insertFriends(uID, friendID) {
+  dbConfig.query(`INSERT INTO friends (\`initiatedUser\`, \`requestedUser\`) VALUES (\'${uID}\',\'${friendID}\')`, (err, result) => {
+    if (err) throw err;
+    increaseFriends(uID);
+    return 1;
+  });
+}
+
+function checkFriends(uID, friendID, callback) {
+  dbConfig.query(`SELECT * FROM friends WHERE (\`initiatedUser\` = \'${uID}\' AND \`requestedUser\` = \'${friendID}\') OR (\`initiatedUser\` = \'${friendID}\' AND \`requestedUser\` = \'${uID}\')`, (err, result) => {
+    if (err) throw err;
+    if (result.length < 1) {
+      insertFriends(uID, friendID);
+      callback(0);
+    }else {
+      callback(1);
+    }
+  });
+}
+
+function increaseFriends(uID) {
+  dbConfig.query(`UPDATE userStats SET friends = friends + 1 WHERE userStats.userID = ${uID}`, (err, result) => {
+    if (err) throw err;
+    return 1;
+  });
+}
 
 app.get("/makefriends/:id/:friend", (req, res) => {
   const uID = req.params.id;
