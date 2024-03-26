@@ -44,24 +44,24 @@ const WeatherScreen = () => {
   const sendNotifications = (data) => {
     // Check temperature
     if (data.main.temp > 11) {
-      sendNotification("Temperature Alert", "Temperature is above 11°C");
+      sendNotification("Temperature Alert", "Temperature is above 11°C, go outside and enjoy the weather");
     }
 
     // Check for rain
     if (data.weather[0].main === "Rain") {
-      sendNotification("Weather Alert", "It's going to rain");
+      sendNotification("Weather Alert", "It's going to rain, bring an ubmrella");
     }
 
     // Check for windy conditions
     if (data.wind.speed > 10) {
-      sendNotification("Weather Alert", "It's windy outside");
+      sendNotification("Weather Alert", "It's windy outside, bring a jacket");
     }
   };
 
   const checkAltitude = async () => {
     const shouldNotify = await AltitudeService.processAltitudeData();
     if (shouldNotify) {
-      sendNotification("Altitude Alert", "Altitude is above 200 meters");
+      sendNotification("Altitude Alert", "Altitude is above 2000 meters, remember to drink water and breathe");
     }
   };
 

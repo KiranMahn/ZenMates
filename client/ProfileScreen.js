@@ -99,8 +99,6 @@ const ProfileScreen = ({navigation, route}) => {
     }
 
 
-    console.log(name);
-
     return (
       <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
         <View style={{width:"100%", height:"20%", display: "flex", justifyContent: 'space-around', alignItems: 'center'}}>
@@ -125,10 +123,6 @@ const ProfileScreen = ({navigation, route}) => {
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>DoB: </Text>
             <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{dob}</TextInput>
-          </View>
-          <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
-            <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Streak: </Text>
-            <TextInput style={{width: '60%', fontSize: 20, padding: 5, borderRadius: 10}} editable={false}>{streak}</TextInput>
           </View>
           <View style={{display: 'flex', flexDirection: 'row', width: '100%', margin: 20}}>
             <Text style={{width: '30%', fontSize: 20, fontWeight: 'bold'}}>Medals: </Text>

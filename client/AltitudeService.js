@@ -42,8 +42,8 @@ const AltitudeService = {
         return false;
       }
 
-      // Check if altitude exceeds 200 meters
-      const threshold = 200; // Example threshold in meters
+      // Check if altitude exceeds 2000 meters
+      const threshold = 2000; // Example threshold in meters
       if (altitude > threshold) {
         // Altitude exceeds threshold, send notification
         return true;

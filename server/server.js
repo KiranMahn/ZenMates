@@ -36,12 +36,22 @@ app.get("/getguidedata", (req, res) => {
 app.get("/getDiscussionPosts", (req, res) => {
   dbConfig.query("SELECT profiles.firstName, discussionBoard.title, discussionBoard.body FROM discussionBoard INNER JOIN profiles WHERE discussionBoard.authorID = profiles.profileID;", (err, result) => {
     if (err) throw err;
-    //numArticles = result.length
-    //console.log(result.length);
     return res.json(result);
 
   });
 });
+
+
+function awardmedal(uID, callback) {
+  dbConfig.query(`SELECT \`posts\` FROM userStats WHERE userStats.userID = ${uID}`, (err, result) => {
+    if (err) throw err;
+    if ((result[0].posts % 3) == 0) {
+      callback(0);
+    }else {
+      callback(1);
+    }
+  });
+}
 
 app.get("/makeDiscussionPost/:id/:title/:body", (req, res) => {
   const authID = req.params.id;
@@ -49,8 +59,6 @@ app.get("/makeDiscussionPost/:id/:title/:body", (req, res) => {
   const body = req.params.body;
   dbConfig.query(`INSERT INTO discussionBoard (\`authorID\`, \`title\`, \`body\`) VALUES (\'${authID}\', \'${title}\', \'${body}\')`, (err, result) => {
     if (err) throw err;
-    //numArticles = result.length
-    //console.log(result.length);
     return res.json(result);
 
   });
@@ -61,7 +69,17 @@ app.get("/makeDiscussionPost/:id/:title/:body", (req, res) => {
     if (err) throw err;
   });
 
+  awardmedal(authID, (check) => {
+    if (check == 0) {
+      dbConfig.query(`UPDATE userStats SET medals = medals + 1 WHERE userStats.userID = ${authID}`, (err, result) => {
+        if (err) throw err;
+      });
+    }
+  });
+
 });
+
+
 
 
 app.get("/getarticledata/:id/:userid", (req, res) => {
@@ -186,14 +204,6 @@ app.get("/signup/:fname/:lname/:dob/:gen/:uname/:eml/:pass/:phn", (req, res) => 
       return res.json("7");
     }
   });
-  /*if (isUsername == 0 && isEmail == 0 && isPhone == 0) {
-    dbConfig.query(`INSERT INTO profiles (\`firstName\`, \`lastName\`, \`dob\`, \`gender\`, \`username\`, \`email\`, \`password\`, \`phone\`) VALUES (\'${firstName}\', \'${lastName}\', \'${dateOfBirth}\', \'${gender}\', \'${username}\', \'${email}\', \'${password}\', \'${phoneNum}\')`, (err, result) => {
-      if (err) throw err;
-      return res.json("Success!");
-    });
-  }else{
-    return res.json("errors")
-  }*/
 
 });
 
